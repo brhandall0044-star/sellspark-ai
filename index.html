@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SellSpark AI</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#faf6f3;color:#171717}
+.app{max-width:430px;margin:auto;min-height:100vh;padding-bottom:80px}
+header{padding:22px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:25px;font-weight:bold}
+.logo span{color:#c97872;font-style:italic}
+main{padding:10px 18px}
+.hero{text-align:center;padding:20px 5px}
+.hero h1{font-size:34px;margin:5px}
+.hero p{color:#777}
+.upload{background:linear-gradient(135deg,#d27d76,#ad625d);color:white;border-radius:24px;padding:24px;text-align:center}
+.upload-icon{font-size:45px}
+button{border:0;border-radius:15px;padding:14px 18px;font-size:15px;font-weight:bold;cursor:pointer}
+.primary{background:white;color:#874e49;width:100%}
+.secondary{background:#f0dcd8;color:#633b38;width:100%;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}
+.tile{background:white;border:1px solid #eee0dc;border-radius:18px;padding:17px 5px;text-align:center}
+.tile div{font-size:25px}.tile b{font-size:12px}
+.card{background:white;border-radius:20px;padding:18px;margin:14px 0;border:1px solid #eee2de}
+.btn{width:100%;background:#171717;color:white;margin-top:12px}
+.back{background:none;font-size:28px;padding:0}
+.title{display:flex;align-items:center;gap:12px}
+.title h2{margin:0}
+.output{background:#faf5f3;border-radius:14px;padding:14px;line-height:1.5}
+input,textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:7px 0;font-size:15px}
+.price{font-size:30px;font-weight:bold}
+.green{color:#16834b}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);background:white;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:10px}
+nav button{background:none;font-size:12px;color:#777;padding:5px}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+<div class="logo">🛍️ SellSpark <span>AI</span></div>
+<div>🔔</div>
+</header>
+
+<main id="app"></main>
+
+<nav>
+<button onclick="home()">🏠<br>Home</button>
+<button onclick="analyze()">🔎<br>Analyze</button>
+<button onclick="listing()">📝<br>Listing</button>
+<button onclick="assistant()">🤖<br>AI</button>
+</nav>
+
+</div>
+
+<script>
+
+const app=document.getElementById("app");
+
+function home(){
+app.innerHTML=`
+<div class="hero">
+<h1>Turn Products<br>Into Sales.</h1>
+<p>Your AI business bestie.</p>
+</div>
+
+<div class="upload">
+<div class="upload-icon">📸</div>
+<h2>What are you selling today?</h2>
+<p>Start with a product and let SellSpark help.</p>
+<button class="primary" onclick="analyze()">Upload Product</button>
+</div>
+
+<button class="secondary" onclick="analyze()">🔗 Paste Product Link</button>
+
+<div class="grid">
+<div class="tile" onclick="analyze()">🔎<div>Product</div><b>Analyzer</b></div>
+<div class="tile" onclick="listing()">📝<div>Listing</div><b>Builder</b></div>
+<div class="tile" onclick="ads()">🎬<div>Ad</div><b>Creator</b></div>
+<div class="tile" onclick="profit()">📊<div>Profit</div><b>Calculator</b></div>
+<div class="tile" onclick="social()">📱<div>Social</div><b>Content</b></div>
+<div class="tile" onclick="assistant()">🤖<div>Business</div><b>Assistant</b></div>
+</div>
+
+<div class="card">
+<b>Free Plan</b>
+<p>3 product analyses this month.</p>
+<button class="btn" onclick="upgrade()">Upgrade to Pro — $19.99/mo</button>
+</div>`;
+}
+
+function back(){
+home();
+}
+
+function title(name){
+return `<div class="title">
+<button class="back" onclick="home()">‹</button>
+<h2>${name}</h2>
+</div>`;
+}
+
+function analyze(){
+app.innerHTML=title("Product Analyzer")+`
+<div class="card">
+<h2>🛍️ Product Analysis</h2>
+<p>For this demo, we'll analyze a sample product.</p>
+<input placeholder="Product name" value="40 oz Insulated Tumbler">
+<input placeholder="Product cost" value="12">
+<button class="btn" onclick="runAnalysis()">✨ Analyze Product</button>
+</div>
+<div id="analysis"></div>`;
+}
+
+function runAnalysis(){
+document.getElementById("analysis").innerHTML=`
+<div class="card">
+<h3>✨ AI Product Insights</h3>
+<p><b>Target customer:</b> People who want convenient drinkware for work, travel, fitness and everyday use.</p>
+<p><b>Positioning:</b> Stylish everyday hydration product.</p>
+<p><b>Suggested selling price:</b></p>
+<div class="price">$29.99</div>
+<p class="green"><b>Estimated profit: $9.49</b></p>
+</div>
+<button class="btn" onclick="listing()">Create Product Listing →</button>`;
+}
+
+function listing(){
+app.innerHTML=title("Listing Builder")+`
+<div class="card">
+<h3>Product Title</h3>
+<div class="output">
+40 oz Insulated Tumbler with Handle — Leakproof Stainless Steel Cup for Travel & Everyday Hydration
+</div>
+
+<h3>Description</h3>
+<div class="output">
+Stay hydrated in style with this 40 oz insulated tumbler. Designed for everyday use, work, travel, workouts and more. The comfortable handle makes carrying easy while the durable construction makes it a practical addition to your daily routine.
+</div>
+
+<h3>Keywords</h3>
+<div class="output">
+40 oz tumbler • insulated tumbler • travel cup • reusable cup • stainless steel tumbler
+</div>
+
+<button class="btn" onclick="alert('Listing saved!')">Save Listing</button>
+</div>`;
+}
+
+function ads(){
+app.innerHTML=title("Ad Creator")+`
+<div class="card">
+<h3>🎬 TikTok Ad — 15 Seconds</h3>
+<div class="output">
+<strong>0–3 sec:</strong> “Still using a boring water bottle?”
+
+<strong>3–7 sec:</strong> Show the tumbler and demonstrate the handle.
+
+<strong>7–11 sec:</strong> “Meet the 40 oz tumbler made for your everyday life.”
+
+<strong>11–15 sec:</strong> “Sip in style. Get yours today!”
+</div>
+<button class="btn" onclick="alert('More video concepts generated!')">Generate More Ideas ✨</button>
+</div>`;
+}
+
+function profit(){
+app.innerHTML=title("Profit Calculator")+`
+<div class="card">
+<label>Product Cost</label>
+<input id="cost" type="number" value="12">
+
+<label>Shipping</label>
+<input id="shipping" type="number" value="4">
+
+<label>Selling Price</label>
+<input id="selling" type="number" value="29.99">
+
+<label>Platform Fees</label>
+<input id="fees" type="number" value="4.50">
+
+<button class="btn" onclick="calculate()">Calculate Profit</button>
+
+<div id="result"></div>
+</div>`;
+}
+
+function calculate(){
+let c=Number(cost.value);
+let s=Number(shipping.value);
+let p=Number(selling.value);
+let f=Number(fees.value);
+let profit=p-c-s-f;
+let margin=(profit/p)*100;
+
+result.innerHTML=`
+<div class="card">
+<p>Estimated profit per sale</p>
+<div class="price green">$${profit.toFixed(2)}</div>
+<p>Estimated margin: ${margin.toFixed(1)}%</p>
+</div>`;
+}
+
+function social(){
+app.innerHTML=title("Social Content")+`
+<div class="card">
+<h3>📱 TikTok Caption</h3>
+<div class="output">
+Your new everyday favorite ✨ Stylish, practical and ready to go wherever you do.
+
+#tumbler #shoppingfinds #smallbusiness #onlineshopping
+</div>
+
+<h3>Instagram Caption</h3>
+<div class="output">
+Make every sip better ✨ Meet your new everyday tumbler.
+</div>
+
+<button class="btn" onclick="alert('10 social posts generated!')">Generate 10 Posts</button>
+</div>`;
+}
+
+function assistant(){
+app.innerHTML=title("Business Assistant")+`
+<div class="card">
+<h3>🤖 SellSpark AI</h3>
+<p>Ask me about your online business.</p>
+
+<div class="output">
+Hi! I'm your SellSpark business assistant.
+
+Try asking:
+<br><br>
+• What should I sell?
+<br>
+• Give me TikTok ideas.
+<br>
+• How should I price my product?
+<br>
+• Why isn't my product selling?
+<br>
+• Write an ad for me.
+</div>
+
+<input id="question" placeholder="Ask SellSpark...">
+
+<button class="btn" onclick="answer()">Ask AI ✨</button>
+
+<div id="answer"></div>
+</div>`;
+}
+
+function answer(){
+let q=document.getElementById("question").value;
+
+document.getElementById("answer").innerHTML=`
+<div class="card">
+<b>SellSpark:</b>
+<p>Great question! In the production version, I'll analyze your actual product and give you a personalized answer.</p>
+<p><b>Your question:</b> ${q || "Tell me how to grow my store."}</p>
+</div>`;
+}
+
+function upgrade(){
+alert("Pro subscriptions will be connected in the production version.");
+}
+
+home();
+
+</script>
+
+</body>
+</html>
