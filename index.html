@@ -324,11 +324,14 @@ async function answer(){
     if(!response.ok){
       throw new Error(data.error || "AI request failed.");
     }
-
+const cleanAnswer = (data.answer || "No answer returned.")
+  .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+  .replace(/^### (.*)$/gm, "<h3>$1</h3>")
+  .replace(/\n/g, "<br>");
     answerBox.innerHTML = `
       <div class="card">
         <b>🤖 SellSpark:</b>
-        <p>${data.answer || "No answer returned."}</p>
+        <p>${cleanAnswer}</p>
       </div>
     `;
 
