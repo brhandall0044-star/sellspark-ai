@@ -289,15 +289,57 @@ Try asking:
 </div>`;
 }
 
-function answer(){
-let q=document.getElementById("question").value;
+async function answer(){
+  const q = document.getElementById("question").value.trim();
+  const answerBox = document.getElementById("answer");
 
-document.getElementById("answer").innerHTML=`
-<div class="card">
-<b>SellSpark:</b>
-<p>Great question! In the production version, I'll analyze your actual product and give you a personalized answer.</p>
-<p><b>Your question:</b> ${q || "Tell me how to grow my store."}</p>
-</div>`;
+  if(!q){
+    answerBox.innerHTML = `
+      <div class="card">
+        <p>Please enter a question first.</p>
+      </div>
+    `;
+    return;
+  }
+
+  answerBox.innerHTML = `
+    <div class="card">
+      <p>✨ SellSpark is thinking...</p>
+    </div>
+  `;
+
+  try{
+    const response = await fetch("/api/ask-ai.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        question: q
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error || "AI request failed.");
+    }
+
+    answerBox.innerHTML = `
+      <div class="card">
+        <b>🤖 SellSpark:</b>
+        <p>${formatText(data.answer || "No answer returned.")}</p>
+      </div>
+    `;
+
+  }catch(error){
+    answerBox.innerHTML = `
+      <div class="card">
+        <h3>⚠️ AI Error</h3>
+        <p>${error.message}</p>
+      </div>
+    `;
+  }
 }
 
 function upgrade(){
