@@ -309,7 +309,7 @@ async function answer(){
   `;
 
   try{
-    const response = await fetch("/api/ask-ai.js", {
+    const response = await fetch( "https://sellspark-ai-rho.vercel.app/api/ask-ai", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
