@@ -118,37 +118,71 @@ app.innerHTML=title("Product Analyzer")+`
 }
 
 function runAnalysis(){
-document.getElementById("analysis").innerHTML=`
-<div class="card">
-<h3>✨ AI Product Insights</h3>
-<p><b>Target customer:</b> People who want convenient drinkware for work, travel, fitness and everyday use.</p>
-<p><b>Positioning:</b> Stylish everyday hydration product.</p>
-<p><b>Suggested selling price:</b></p>
-<div class="price">$29.99</div>
-<p class="green"><b>Estimated profit: $9.49</b></p>
-</div>
-<button class="btn" onclick="listing()">Create Product Listing →</button>`;
+  const productName=document.querySelector('input[placeholder="Product name"]').value;
+  const productCost=Number(document.querySelector('input[placeholder="Product cost"]').value);
+
+  if(!productName){
+    alert("Please enter a product name.");
+    return;
+  }
+
+  if(!productCost || productCost<=0){
+    alert("Please enter a valid product cost.");
+    return;
+  }
+
+  const sellingPrice=Math.ceil((productCost*2.5)/0.99);
+  const profit=sellingPrice-productCost;
+  const margin=(profit/sellingPrice)*100;
+
+  document.getElementById("analysis").innerHTML=`
+    <div class="card">
+      <h3>✨ AI Product Insights</h3>
+
+      <p><b>Product:</b> ${productName}</p>
+
+      <p><b>Target customer:</b>
+      Shoppers looking for ${productName} for convenient everyday use.</p>
+
+      <p><b>Positioning:</b>
+      Present ${productName} as a useful, problem-solving product with clear everyday benefits.</p>
+
+      <p><b>Suggested selling price:</b></p>
+
+      <div class="price">$${sellingPrice.toFixed(2)}</div>
+
+      <p class="green">
+      <b>Estimated profit:</b> $${profit.toFixed(2)}
+      </p>
+
+      <p><b>Estimated margin:</b> ${margin.toFixed(1)}%</p>
+
+      <button class="btn" onclick="listing()">Create Product Listing →</button>
+    </div>
+  `;
 }
 
 function listing(){
+const productName=document.querySelector('input[placeholder="Product name"]')?.value||"your product";
+
 app.innerHTML=title("Listing Builder")+`
 <div class="card">
 <h3>Product Title</h3>
 <div class="output">
-40 oz Insulated Tumbler with Handle — Leakproof Stainless Steel Cup for Travel & Everyday Hydration
+${productName} – Premium Quality, Stylish & Easy to Use
 </div>
 
 <h3>Description</h3>
 <div class="output">
-Stay hydrated in style with this 40 oz insulated tumbler. Designed for everyday use, work, travel, workouts and more. The comfortable handle makes carrying easy while the durable construction makes it a practical addition to your daily routine.
+Discover ${productName}, designed to make everyday life easier and more convenient. Perfect for shoppers looking for quality, style and practical value.
 </div>
 
 <h3>Keywords</h3>
 <div class="output">
-40 oz tumbler • insulated tumbler • travel cup • reusable cup • stainless steel tumbler
+${productName} • premium ${productName} • useful product • everyday essential • trending product
 </div>
 
-<button class="btn" onclick="alert('Listing saved!')">Save Listing</button>
+<button class="btn" onclick="alert('Listing copied!')">Copy Listing</button>
 </div>`;
 }
 
