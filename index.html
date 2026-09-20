@@ -358,49 +358,148 @@ alert("Pro subscriptions will be connected in the production version.");
             throw new Error(data.error || "AI analysis failed.");
           }
 
-          const result=(data.result || "").trim();
+          const result = (data.result || "").trim();
 
-          let productName=
-            result.match(/product name\s*[:\-]\s*(.+)/i)?.[1] ||
-            result.split(/\n/).map(x=>x.trim()).find(Boolean) ||
-            "Unknown product";
+function getSection(name, nextNames = []) {
+  const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  let pattern = escapedName + "\\s*:\\s*([\\s\\S]*?)";
 
-          productName=productName
-            .replace(/\*\*/g,"")
-            .replace(/^[-•]\s*/,"")
-            .trim();
+  if (nextNames.length) {
+    pattern += "(?=\\n\\s*(?:" +
+      nextNames.map(n =>
+        n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      ).join("|") +
+      ")\\s*:|$)";
+  } else {
+    pattern += "$";
+  }
 
-          const safeName=productName
-            .replace(/&/g,"&amp;")
-            .replace(/</g,"&lt;")
-            .replace(/>/g,"&gt;")
-            .replace(/"/g,"&quot;");
+  const match = result.match(new RegExp(pattern, "i"));
+  return match ? match[1].trim() : "";
+}
 
-          app.innerHTML=title("Product Analyzer")+`
-            <div class="card">
-              <h2>🛍️ Product Analysis</h2>
+const sections = [
+  "PRODUCT NAME",
+  "PRODUCT DESCRIPTION",
+  "PRODUCT CATEGORY",
+  "TARGET CUSTOMER",
+  "KEY SELLING POINTS",
+  "POTENTIAL PROBLEMS/COMPETITION",
+  "SUGGESTED SELLING PRICE",
+  "ESTIMATED PROFIT",
+  "PRODUCT LISTING",
+  "TIKTOK/INSTAGRAM AD IDEAS"
+];
 
-              <img src="${imageData}" style="width:100%;border-radius:15px;margin:10px 0;">
+function esc(text) {
+  return String(text || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
 
-              <p><b>✨ AI identified:</b> ${safeName}</p>
+function formatText(text) {
+  return esc(text)
+    .replace(/\n/g, "<br>")
+    .replace(/•/g, "•");
+}
 
-              <input
-                placeholder="Product name"
-                value="${safeName}"
-              >
+const productName =
+  getSection("PRODUCT NAME", sections.slice(1)) ||
+  "Unknown product";
 
-              <input
-                placeholder="Product cost"
-                value=""
-              >
+const safeName = esc(productName);
 
-              <button class="btn" onclick="runAnalysis()">
-                ✨ Analyze Product
-              </button>
-            </div>
+const description =
+  getSection("PRODUCT DESCRIPTION", sections.slice(2));
 
-            <div id="analysis"></div>
-          `;
+const category =
+  getSection("PRODUCT CATEGORY", sections.slice(3));
+
+const targetCustomer =
+  getSection("TARGET CUSTOMER", sections.slice(4));
+
+const sellingPoints =
+  getSection("KEY SELLING POINTS", sections.slice(5));
+
+const problems =
+  getSection("POTENTIAL PROBLEMS/COMPETITION", sections.slice(6));
+
+const sellingPrice =
+  getSection("SUGGESTED SELLING PRICE", sections.slice(7));
+
+const estimatedProfit =
+  getSection("ESTIMATED PROFIT", sections.slice(8));
+
+const productListing =
+  getSection("PRODUCT LISTING", sections.slice(9));
+
+const adIdeas =
+  getSection("TIKTOK/INSTAGRAM AD IDEAS", []);
+
+app.innerHTML = title("AI Product Analysis") + `
+  <div class="card">
+
+    <h2>🛍️ AI Product Analysis</h2>
+
+    <img src="${imageData}"
+         style="width:100%;border-radius:16px;margin-bottom:16px;">
+
+    <h3>✨ Product Name</h3>
+    <p>${formatText(productName)}</p>
+
+    <h3>📝 Product Description</h3>
+    <p>${formatText(description)}</p>
+
+    <h3>📂 Product Category</h3>
+    <p>${formatText(category)}</p>
+
+    <h3>🎯 Target Customer</h3>
+    <p>${formatText(targetCustomer)}</p>
+
+    <h3>⭐ Key Selling Points</h3>
+    <p>${formatText(sellingPoints)}</p>
+
+    <h3>⚠️ Potential Problems / Competition</h3>
+    <p>${formatText(problems)}</p>
+
+    <h3>💰 Suggested Selling Price</h3>
+    <p>${formatText(sellingPrice)}</p>
+
+    <h3>📈 Estimated Profit</h3>
+    <p>${formatText(estimatedProfit)}</p>
+
+    <h3>🛒 Product Listing</h3>
+    <div class="card">
+      <p>${formatText(productListing)}</p>
+    </div>
+
+    <h3>🎥 TikTok / Instagram Ad Ideas</h3>
+    <div class="card">
+      <p>${formatText(adIdeas)}</p>
+    </div>
+
+    <h3>Product Name</h3>
+    <input
+      placeholder="Product name"
+      value="${safeName}"
+    >
+
+    <h3>Product Cost</h3>
+    <input
+      placeholder="Product cost"
+      value=""
+    >
+
+    <button class="btn" onclick="analyzeProduct()">
+      ✨ Analyze Product
+    </button>
+
+  </div>
+
+  <div id="analysis"></div>
+`;
 
         }catch(error){
 
