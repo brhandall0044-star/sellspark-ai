@@ -73,7 +73,7 @@ app.innerHTML=`
 <div class="upload-icon">📸</div>
 <h2>What are you selling today?</h2>
 <p>Start with a product and let SellSpark help.</p>
-<button class="primary" onclick="analyze()">Upload Product</button>
+<button class="primary" onclick=" uploadProduct()">Upload Product</button>
 </div>
 
 <button class="secondary" onclick="analyze()">🔗 Paste Product Link</button>
@@ -268,6 +268,33 @@ document.getElementById("answer").innerHTML=`
 
 function upgrade(){
 alert("Pro subscriptions will be connected in the production version.");
+} 
+  function uploadProduct(){
+  const input=document.createElement("input");
+  input.type="file";
+  input.accept="image/*";
+
+  input.onchange=function(){
+    const file=input.files[0];
+    if(!file)return;
+
+    const reader=new FileReader();
+
+    reader.onload=function(e){
+      app.innerHTML=title("Upload Product")+`
+        <div class="card">
+          <h3>📸 Product Uploaded</h3>
+          <img src="${e.target.result}" style="width:100%;border-radius:15px;margin:10px 0;">
+          <p><b>File:</b> ${file.name}</p>
+          <button class="btn" onclick="analyze()">Analyze Product</button>
+        </div>
+      `;
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  input.click();
 }
 
 home();
