@@ -182,7 +182,29 @@ Discover ${productName}, designed to make everyday life easier and more convenie
 <div class="output">
 ${productName} • premium ${productName} • useful product • everyday essential • trending product
 </div>
+<h3>✨ Selling Points</h3>
+<div class="output">
+• Stylish and practical design<br>
+• Easy to use every day<br>
+• Great value for shoppers<br>
+• Perfect for everyday needs<br>
+• A useful addition to any lifestyle
+</div>
 
+<h3>💰 Suggested Pricing</h3>
+<div class="output">
+<label>Product Cost</label>
+<input id="listingCost" type="number" placeholder="Enter your cost">
+
+<button class="btn" onclick="
+const cost=Number(document.getElementById('listingCost').value);
+document.getElementById('listingPrice').innerText=cost>0
+?'Suggested price: $'+(cost*2.5).toFixed(2)+' – $'+(cost*3).toFixed(2)
+:'Enter a product cost above';
+">Calculate Price</button>
+
+<p id="listingPrice">Enter a product cost above</p>
+</div>
 <button class="btn" onclick="alert('Listing copied!')">Copy Listing</button>
 </div>`;
 }
