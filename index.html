@@ -61,7 +61,7 @@ nav button{background:none;font-size:12px;color:#777;padding:5px}
 <script>
 
 const app=document.getElementById("app");
-
+let currentProductName = "";
 function home(){
 app.innerHTML=`
 <div class="hero">
@@ -119,6 +119,7 @@ app.innerHTML=title("Product Analyzer")+`
 
 function runAnalysis(){
   const productName=document.querySelector('input[placeholder="Product name"]').value;
+  currentProductName = productName;
   const productCost=Number(document.querySelector('input[placeholder="Product cost"]').value);
 
   if(!productName){
@@ -163,7 +164,7 @@ function runAnalysis(){
 }
 
 function listing(){
-const productName=document.querySelector('input[placeholder="Product name"]')?.value||"your product";
+const productName = currentProductName || document.querySelector('input[placeholder="Product name"]')?.value || "your product";
 
 app.innerHTML=title("Listing Builder")+`
 <div class="card">
