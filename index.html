@@ -165,30 +165,47 @@ function runAnalysis(){
 
 function listing(){
 const productName = currentProductName || document.querySelector('input[placeholder="Product name"]')?.value || "your product";
+const name = productName.toLowerCase();
+let productType = "product";
+let useCase = "everyday use";
+let features = ["practical design", "easy to use", "made for everyday needs"];
 
+if(name.includes("phone") || name.includes("holder") || name.includes("mount")){
+  productType = "phone holder";
+  useCase = "keeping your phone secure and accessible";
+  features = ["secure phone placement", "hands-free viewing", "adjustable positioning"];
+}else if(name.includes("nail") || name.includes("manicure") || name.includes("gel")){
+  productType = "nail kit";
+  useCase = "creating salon-style nails at home";
+  features = ["DIY nail care", "easy application", "at-home manicure convenience"];
+}else if(name.includes("sheet") || name.includes("mattress") || name.includes("bedding")){
+  productType = "bedding product";
+  useCase = "creating a more comfortable bed";
+  features = ["comfortable feel", "bedroom upgrade", "everyday comfort"];
+}else if(name.includes("light") || name.includes("ring light") || name.includes("lamp")){
+  productType = "lighting product";
+  useCase = "improving lighting for photos and videos";
+  features = ["portable lighting", "brighter photos", "easy positioning"];
+}
 app.innerHTML=title("Listing Builder")+`
 <div class="card">
 <h3>Product Title</h3>
 <div class="output">
-${productName} – Premium Quality, Stylish & Easy to Use
+${productName} - ${productType} for ${useCase}
 </div>
 
 <h3>Description</h3>
 <div class="output">
-Discover ${productName}, designed to make everyday life easier and more convenient. Perfect for shoppers looking for quality, style and practical value.
+Discover ${productName}, a ${productType} designed for ${useCase}. Key benefits include ${features.join(", ")}.
 </div>
 
 <h3>Keywords</h3>
 <div class="output">
-${productName} • premium ${productName} • useful product • everyday essential • trending product
+${productName} • ${productType} • ${useCase} • ${features.join(" • ")}
 </div>
 <h3>✨ Selling Points</h3>
 <div class="output">
-• Stylish and practical design<br>
-• Easy to use every day<br>
-• Great value for shoppers<br>
-• Perfect for everyday needs<br>
-• A useful addition to any lifestyle
+${features.map(f => "• " + f).join("<br>")}
 </div>
 
 <h3>💰 Suggested Pricing</h3>
