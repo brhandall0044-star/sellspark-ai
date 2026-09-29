@@ -3,38 +3,543 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SellSpark AI</title>
+
+<title>SellSpark Marketplace</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#faf6f3;color:#171717}
-.app{max-width:430px;margin:auto;min-height:100vh;padding-bottom:80px}
-header{padding:22px 20px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:25px;font-weight:bold}
-.logo span{color:#c97872;font-style:italic}
-main{padding:10px 18px}
-.hero{text-align:center;padding:20px 5px}
-.hero h1{font-size:34px;margin:5px}
-.hero p{color:#777}
-.upload{background:linear-gradient(135deg,#d27d76,#ad625d);color:white;border-radius:24px;padding:24px;text-align:center}
-.upload-icon{font-size:45px}
-button{border:0;border-radius:15px;padding:14px 18px;font-size:15px;font-weight:bold;cursor:pointer}
-.primary{background:white;color:#874e49;width:100%}
-.secondary{background:#f0dcd8;color:#633b38;width:100%;margin-top:10px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}
-.tile{background:white;border:1px solid #eee0dc;border-radius:18px;padding:17px 5px;text-align:center}
-.tile div{font-size:25px}.tile b{font-size:12px}
-.card{background:white;border-radius:20px;padding:18px;margin:14px 0;border:1px solid #eee2de}
-.btn{width:100%;background:#171717;color:white;margin-top:12px}
-.back{background:none;font-size:28px;padding:0}
-.title{display:flex;align-items:center;gap:12px}
-.title h2{margin:0}
-.output{background:#faf5f3;border-radius:14px;padding:14px;line-height:1.5}
-input,textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:7px 0;font-size:15px}
-.price{font-size:30px;font-weight:bold}
-.green{color:#16834b}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);background:white;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:10px}
-nav button{background:none;font-size:12px;color:#777;padding:5px}
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f7f7f8;
+  color:#171717;
+}
+
+button,input{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  max-width:430px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:90px;
+  background:#f7f7f8;
+}
+
+/* HEADER */
+
+header{
+  background:white;
+  padding:18px 18px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:20;
+  border-bottom:1px solid #eeeeee;
+}
+
+.logo{
+  font-size:23px;
+  font-weight:800;
+}
+
+.logo span{
+  color:#c76b61;
+}
+
+.header-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.icon-btn{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:0;
+  background:#f3f3f3;
+  font-size:18px;
+}
+
+/* MAIN */
+
+main{
+  padding:14px 16px 20px;
+}
+
+/* SEARCH */
+
+.search{
+  background:white;
+  border:1px solid #e5e5e5;
+  border-radius:15px;
+  padding:13px 15px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.search input{
+  border:0;
+  outline:0;
+  width:100%;
+  font-size:15px;
+  background:transparent;
+}
+
+/* HERO */
+
+.hero{
+  background:linear-gradient(135deg,#c96d64,#9f4f49);
+  color:white;
+  border-radius:22px;
+  padding:22px 20px;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  margin:0 0 7px;
+  font-size:29px;
+  line-height:1.1;
+}
+
+.hero p{
+  margin:0 0 16px;
+  opacity:.9;
+  line-height:1.4;
+}
+
+.sell-btn{
+  background:white;
+  color:#8e4843;
+  border:0;
+  border-radius:13px;
+  padding:12px 17px;
+  font-weight:bold;
+}
+
+/* SECTION */
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:20px 0 10px;
+}
+
+.section-head h2{
+  font-size:19px;
+  margin:0;
+}
+
+.section-head button{
+  border:0;
+  background:none;
+  color:#a7554e;
+  font-weight:bold;
+}
+
+/* CATEGORIES */
+
+.categories{
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+  padding-bottom:4px;
+}
+
+.categories::-webkit-scrollbar{
+  display:none;
+}
+
+.category{
+  flex:0 0 auto;
+  background:white;
+  border:1px solid #e8e8e8;
+  border-radius:14px;
+  padding:10px 13px;
+  font-size:13px;
+  white-space:nowrap;
+}
+
+/* PRODUCTS */
+
+.products{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.product{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid #ededed;
+  position:relative;
+}
+
+.product-img{
+  height:165px;
+  background:#eeeeee;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:55px;
+}
+
+.product-body{
+  padding:12px;
+}
+
+.product-name{
+  font-weight:bold;
+  font-size:14px;
+  line-height:1.3;
+  min-height:37px;
+}
+
+.price{
+  font-size:19px;
+  font-weight:800;
+  margin-top:7px;
+}
+
+.seller{
+  color:#777;
+  font-size:11px;
+  margin-top:5px;
+}
+
+.verified{
+  color:#16834b;
+  font-weight:bold;
+}
+
+.favorite{
+  position:absolute;
+  top:9px;
+  right:9px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:0;
+  background:white;
+  font-size:17px;
+}
+
+/* COUNTRY */
+
+.countries{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+}
+
+.country{
+  min-width:125px;
+  background:white;
+  border:1px solid #eee;
+  border-radius:16px;
+  padding:14px;
+}
+
+.country b{
+  display:block;
+  margin-top:8px;
+}
+
+.country small{
+  color:#777;
+}
+
+/* SAFETY */
+
+.safety{
+  background:#fff8ed;
+  border:1px solid #f1dfbf;
+  border-radius:18px;
+  padding:16px;
+  margin-top:22px;
+}
+
+.safety h3{
+  margin-top:0;
+}
+
+.safety p{
+  font-size:13px;
+  line-height:1.5;
+  color:#665;
+}
+
+/* CARDS */
+
+.card{
+  background:white;
+  border-radius:19px;
+  padding:17px;
+  margin-bottom:13px;
+  border:1px solid #ededed;
+}
+
+.card h2,
+.card h3{
+  margin-top:0;
+}
+
+.primary{
+  width:100%;
+  background:#171717;
+  color:white;
+  border:0;
+  border-radius:13px;
+  padding:14px;
+  font-weight:bold;
+}
+
+.secondary{
+  width:100%;
+  background:#f0ddda;
+  color:#713f3a;
+  border:0;
+  border-radius:13px;
+  padding:14px;
+  font-weight:bold;
+  margin-top:9px;
+}
+
+input,textarea,select{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  margin:6px 0;
+  font-size:15px;
+  background:white;
+}
+
+textarea{
+  min-height:100px;
+  resize:none;
+}
+
+/* DETAIL */
+
+.detail-image{
+  height:270px;
+  background:#eee;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:90px;
+  margin-bottom:15px;
+}
+
+.detail-price{
+  font-size:30px;
+  font-weight:800;
+}
+
+.rating{
+  color:#e3a21a;
+}
+
+/* PROFILE */
+
+.profile-top{
+  text-align:center;
+  background:white;
+  border-radius:20px;
+  padding:24px;
+  margin-bottom:14px;
+}
+
+.avatar{
+  width:75px;
+  height:75px;
+  border-radius:50%;
+  background:#e7c4bf;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  font-size:30px;
+}
+
+.menu{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.menu button{
+  width:100%;
+  padding:16px;
+  text-align:left;
+  background:white;
+  border:0;
+  border-bottom:1px solid #eee;
+  font-size:15px;
+}
+
+/* MESSAGES */
+
+.message{
+  background:white;
+  padding:14px;
+  border-radius:16px;
+  margin-bottom:10px;
+  border:1px solid #eee;
+}
+
+.message b{
+  display:block;
+  margin-bottom:5px;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:100;
+  display:none;
+  align-items:flex-end;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  background:white;
+  width:100%;
+  max-width:430px;
+  margin:auto;
+  border-radius:24px 24px 0 0;
+  padding:22px;
+  max-height:90vh;
+  overflow:auto;
+}
+
+.close{
+  float:right;
+  border:0;
+  background:#eee;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+}
+
+/* NAV */
+
+nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(430px,100%);
+  background:white;
+  border-top:1px solid #e5e5e5;
+  display:flex;
+  justify-content:space-around;
+  padding:8px 3px 9px;
+  z-index:50;
+}
+
+nav button{
+  border:0;
+  background:none;
+  color:#777;
+  font-size:11px;
+  padding:4px 7px;
+}
+
+nav button.active{
+  color:#a6534c;
+  font-weight:bold;
+}
+
+.sell-nav{
+  color:white!important;
+  background:#a6534c!important;
+  border-radius:50%;
+  width:46px;
+  height:46px;
+  font-size:18px!important;
+}
+
+/* EMPTY */
+
+.empty{
+  text-align:center;
+  padding:45px 20px;
+  color:#777;
+}
+
+/* AI TOOLS */
+
+.output{
+  background:#faf5f3;
+  border-radius:14px;
+  padding:14px;
+  line-height:1.5;
+  margin-bottom:10px;
+}
+
+.back{
+  border:0;
+  background:none;
+  font-size:28px;
+  padding:0 8px 0 0;
+}
+
+.page-title{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  margin-bottom:16px;
+}
+
+.page-title h2{
+  margin:0;
+}
+
+/* LANGUAGE */
+
+.language-row{
+  display:flex;
+  gap:8px;
+  margin:10px 0;
+}
+
+.language-row button{
+  flex:1;
+  border:1px solid #ddd;
+  background:white;
+  padding:10px;
+  border-radius:10px;
+}
+
+@media(max-width:350px){
+  .products{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 
@@ -43,572 +548,1376 @@ nav button{background:none;font-size:12px;color:#777;padding:5px}
 <div class="app">
 
 <header>
-<div class="logo">🛍️ SellSpark <span>AI</span></div>
-<div>🔔</div>
+  <div class="logo">🛍️ SellSpark <span>Market</span></div>
+
+  <div class="header-actions">
+    <button class="icon-btn" onclick="notifications()">🔔</button>
+    <button class="icon-btn" onclick="profile()">👤</button>
+  </div>
 </header>
 
 <main id="app"></main>
 
 <nav>
-<button onclick="home()">🏠<br>Home</button>
-<button onclick="analyze()">🔎<br>Analyze</button>
-<button onclick="listing()">📝<br>Listing</button>
-<button onclick="assistant()">🤖<br>AI</button>
+  <button id="navHome" onclick="home()">🏠<br><span data-i18n="home">Home</span></button>
+
+  <button id="navExplore" onclick="explore()">🔎<br><span data-i18n="explore">Explore</span></button>
+
+  <button class="sell-nav" onclick="sell()">＋</button>
+
+  <button id="navMessages" onclick="messages()">💬<br><span data-i18n="messages">Messages</span></button>
+
+  <button id="navProfile" onclick="profile()">👤<br><span data-i18n="profile">Profile</span></button>
 </nav>
 
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-box" id="modalBox"></div>
 </div>
 
 <script>
 
 const app=document.getElementById("app");
-let currentProductName = "";
+
+let currentLanguage="en";
+let savedProducts=[];
+let currentProduct=null;
+
+const products=[
+  {
+    id:1,
+    name:"Women's Summer Dress",
+    price:34.99,
+    country:"🇺🇸 USA",
+    seller:"Belle Fashion",
+    rating:"4.9",
+    icon:"👗",
+    category:"Fashion",
+    verified:true
+  },
+  {
+    id:2,
+    name:"Handmade Haitian Bracelet",
+    price:18,
+    country:"🇭🇹 Haiti",
+    seller:"Kreyol Creations",
+    rating:"5.0",
+    icon:"📿",
+    category:"Gifts",
+    verified:true
+  },
+  {
+    id:3,
+    name:"Beauty Skin Care Set",
+    price:29.99,
+    country:"🇨🇦 Canada",
+    seller:"Glow Beauty",
+    rating:"4.8",
+    icon:"🧴",
+    category:"Beauty",
+    verified:true
+  },
+  {
+    id:4,
+    name:"Wireless Headphones",
+    price:45,
+    country:"🇩🇴 Dominican Republic",
+    seller:"Tech World",
+    rating:"4.7",
+    icon:"🎧",
+    category:"Electronics",
+    verified:false
+  },
+  {
+    id:5,
+    name:"Kitchen Organizer",
+    price:22.50,
+    country:"🇺🇸 USA",
+    seller:"Home Plus",
+    rating:"4.8",
+    icon:"🏠",
+    category:"Home",
+    verified:true
+  },
+  {
+    id:6,
+    name:"Kids Backpack",
+    price:27.99,
+    country:"🇫🇷 France",
+    seller:"Little Stars",
+    rating:"4.9",
+    icon:"🎒",
+    category:"Kids",
+    verified:true
+  }
+];
+
+const translations={
+
+  en:{
+    home:"Home",
+    explore:"Explore",
+    messages:"Messages",
+    profile:"Profile",
+    search:"Search products...",
+    shop:"Find it. Buy it. Connect.",
+    shopText:"A marketplace connecting Haitian buyers and sellers around the world.",
+    sell:"Sell Something",
+    categories:"Categories",
+    trending:"Trending Near You",
+    seeAll:"See All",
+    countries:"Shop From Around The World",
+    safety:"Shop safely",
+    safetyText:"Keep conversations inside SellSpark. Never send verification codes, gift cards, or money to someone you don't know.",
+    verified:"Verified Seller",
+    saved:"Saved",
+    noSaved:"Products you save will appear here.",
+    notifications:"Notifications",
+    noNotifications:"You're all caught up.",
+    messagesTitle:"Messages",
+    noMessages:"Your conversations with sellers will appear here.",
+    profileTitle:"My Profile",
+    sellerTools:"Seller Tools",
+    language:"Language",
+    settings:"Settings",
+    sellTitle:"Sell Something",
+    productName:"Product name",
+    price:"Price",
+    description:"Description",
+    country:"Seller country",
+    post:"Post Listing",
+    sellerToolsTitle:"AI Seller Tools",
+    aiScan:"AI Product Scan",
+    listing:"Listing Builder",
+    profit:"Profit Calculator",
+    aiAssistant:"AI Business Assistant"
+  },
+
+  ht:{
+    home:"Akèy",
+    explore:"Chèche",
+    messages:"Mesaj",
+    profile:"Pwofil",
+    search:"Chèche pwodwi...",
+    shop:"Jwenn li. Achte li. Konekte.",
+    shopText:"Yon mache ki konekte achtè ak vandè ayisyen atravè lemonn.",
+    sell:"Vann yon bagay",
+    categories:"Kategori",
+    trending:"Pwodwi popilè",
+    seeAll:"Gade tout",
+    countries:"Achte nan lemonn",
+    safety:"Achte an sekirite",
+    safetyText:"Kenbe konvèsasyon yo andedan SellSpark. Pa janm voye kòd verifikasyon, kat kado, oswa lajan bay moun ou pa konnen.",
+    verified:"Vandè verifye",
+    saved:"Sove",
+    noSaved:"Pwodwi ou sove yo ap parèt isit la.",
+    notifications:"Notifikasyon",
+    noNotifications:"Ou pa gen nouvo notifikasyon.",
+    messagesTitle:"Mesaj",
+    noMessages:"Konvèsasyon ou yo ak vandè yo ap parèt isit la.",
+    profileTitle:"Pwofil mwen",
+    sellerTools:"Zouti vandè",
+    language:"Lang",
+    settings:"Paramèt",
+    sellTitle:"Vann yon bagay",
+    productName:"Non pwodwi a",
+    price:"Pri",
+    description:"Deskripsyon",
+    country:"Peyi vandè a",
+    post:"Pibliye pwodwi",
+    sellerToolsTitle:"Zouti AI pou vandè",
+    aiScan:"Eskane pwodwi ak AI",
+    listing:"Kreye lis pwodwi",
+    profit:"Kalkilatè pwofi",
+    aiAssistant:"Asistan biznis AI"
+  },
+
+  fr:{
+    home:"Accueil",
+    explore:"Explorer",
+    messages:"Messages",
+    profile:"Profil",
+    search:"Rechercher des produits...",
+    shop:"Trouvez-le. Achetez-le. Connectez-vous.",
+    shopText:"Une marketplace qui connecte les acheteurs et vendeurs haïtiens dans le monde.",
+    sell:"Vendre quelque chose",
+    categories:"Catégories",
+    trending:"Produits populaires",
+    seeAll:"Voir tout",
+    countries:"Acheter dans le monde",
+    safety:"Achetez en sécurité",
+    safetyText:"Gardez les conversations dans SellSpark. N'envoyez jamais de codes de vérification, cartes cadeaux ou argent à des inconnus.",
+    verified:"Vendeur vérifié",
+    saved:"Enregistrés",
+    noSaved:"Les produits que vous enregistrez apparaîtront ici.",
+    notifications:"Notifications",
+    noNotifications:"Vous êtes à jour.",
+    messagesTitle:"Messages",
+    noMessages:"Vos conversations avec les vendeurs apparaîtront ici.",
+    profileTitle:"Mon profil",
+    sellerTools:"Outils vendeur",
+    language:"Langue",
+    settings:"Paramètres",
+    sellTitle:"Vendre quelque chose",
+    productName:"Nom du produit",
+    price:"Prix",
+    description:"Description",
+    country:"Pays du vendeur",
+    post:"Publier",
+    sellerToolsTitle:"Outils IA pour vendeurs",
+    aiScan:"Scanner le produit avec IA",
+    listing:"Créateur d'annonce",
+    profit:"Calculateur de bénéfice",
+    aiAssistant:"Assistant commercial IA"
+  },
+
+  es:{
+    home:"Inicio",
+    explore:"Explorar",
+    messages:"Mensajes",
+    profile:"Perfil",
+    search:"Buscar productos...",
+    shop:"Encuéntralo. Cómpralo. Conecta.",
+    shopText:"Un marketplace que conecta compradores y vendedores haitianos en todo el mundo.",
+    sell:"Vender algo",
+    categories:"Categorías",
+    trending:"Productos populares",
+    seeAll:"Ver todo",
+    countries:"Comprar desde todo el mundo",
+    safety:"Compra de forma segura",
+    safetyText:"Mantén las conversaciones dentro de SellSpark. Nunca envíes códigos de verificación, tarjetas de regalo o dinero a desconocidos.",
+    verified:"Vendedor verificado",
+    saved:"Guardados",
+    noSaved:"Los productos que guardes aparecerán aquí.",
+    notifications:"Notificaciones",
+    noNotifications:"Estás al día.",
+    messagesTitle:"Mensajes",
+    noMessages:"Tus conversaciones con vendedores aparecerán aquí.",
+    profileTitle:"Mi perfil",
+    sellerTools:"Herramientas para vendedores",
+    language:"Idioma",
+    settings:"Configuración",
+    sellTitle:"Vender algo",
+    productName:"Nombre del producto",
+    price:"Precio",
+    description:"Descripción",
+    country:"País del vendedor",
+    post:"Publicar",
+    sellerToolsTitle:"Herramientas IA para vendedores",
+    aiScan:"Escanear producto con IA",
+    listing:"Creador de anuncios",
+    profit:"Calculadora de ganancias",
+    aiAssistant:"Asistente comercial IA"
+  }
+};
+
+function t(key){
+  return translations[currentLanguage][key] || translations.en[key] || key;
+}
+
+function setLanguage(lang){
+  currentLanguage=lang;
+  closeModal();
+  home();
+}
+
+function navActive(id){
+  document.querySelectorAll("nav button").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  const el=document.getElementById(id);
+  if(el) el.classList.add("active");
+}
+
+function productCard(p){
+
+  const saved=savedProducts.includes(p.id);
+
+  return `
+    <div class="product" onclick="productDetail(${p.id})">
+
+      <button class="favorite"
+        onclick="event.stopPropagation();toggleSave(${p.id})">
+        ${saved?"❤️":"♡"}
+      </button>
+
+      <div class="product-img">
+        ${p.icon}
+      </div>
+
+      <div class="product-body">
+
+        <div class="product-name">
+          ${p.name}
+        </div>
+
+        <div class="price">
+          $${p.price.toFixed(2)}
+        </div>
+
+        <div class="seller">
+          ${p.country}
+        </div>
+
+        <div class="seller">
+          ⭐ ${p.rating} · ${p.seller}
+        </div>
+
+        ${p.verified?
+          `<div class="seller verified">✓ ${t("verified")}</div>`:""}
+
+      </div>
+    </div>
+  `;
+}
+
 function home(){
-app.innerHTML=`
-<div class="hero">
-<h1>Turn Products<br>Into Sales.</h1>
-<p>Your AI business bestie.</p>
-</div>
 
-<div class="upload">
-<div class="upload-icon">📸</div>
-<h2>What are you selling today?</h2>
-<p>Start with a product and let SellSpark help.</p>
-<button class="primary" onclick=" uploadProduct()">Upload Product</button>
-</div>
+  navActive("navHome");
 
-<button class="secondary" onclick="analyze()">🔗 Paste Product Link</button>
+  app.innerHTML=`
 
-<div class="grid">
-<div class="tile" onclick="analyze()">🔎<div>Product</div><b>Analyzer</b></div>
-<div class="tile" onclick="listing()">📝<div>Listing</div><b>Builder</b></div>
-<div class="tile" onclick="ads()">🎬<div>Ad</div><b>Creator</b></div>
-<div class="tile" onclick="profit()">📊<div>Profit</div><b>Calculator</b></div>
-<div class="tile" onclick="social()">📱<div>Social</div><b>Content</b></div>
-<div class="tile" onclick="assistant()">🤖<div>Business</div><b>Assistant</b></div>
-</div>
+    <div class="search">
+      🔎
+      <input
+        placeholder="${t("search")}"
+        oninput="searchProducts(this.value)"
+      >
+    </div>
 
-<div class="card">
-<b>Free Plan</b>
-<p>3 product analyses this month.</p>
-<button class="btn" onclick="upgrade()">Upgrade to Pro — $19.99/mo</button>
-</div>`;
+    <div class="hero">
+      <h1>${t("shop")}</h1>
+
+      <p>${t("shopText")}</p>
+
+      <button class="sell-btn" onclick="sell()">
+        ＋ ${t("sell")}
+      </button>
+    </div>
+
+    <div class="section-head">
+      <h2>${t("categories")}</h2>
+      <button onclick="explore()">${t("seeAll")}</button>
+    </div>
+
+    <div class="categories">
+
+      <button class="category" onclick="filterCategory('Fashion')">👗 Fashion</button>
+
+      <button class="category" onclick="filterCategory('Electronics')">📱 Electronics</button>
+
+      <button class="category" onclick="filterCategory('Beauty')">💄 Beauty</button>
+
+      <button class="category" onclick="filterCategory('Home')">🏠 Home</button>
+
+      <button class="category" onclick="filterCategory('Kids')">🧸 Kids</button>
+
+      <button class="category" onclick="filterCategory('Food')">🍲 Food</button>
+
+      <button class="category" onclick="filterCategory('Gifts')">🎁 Gifts</button>
+
+    </div>
+
+    <div class="section-head">
+      <h2>${t("trending")}</h2>
+      <button onclick="explore()">${t("seeAll")}</button>
+    </div>
+
+    <div id="homeProducts" class="products">
+      ${products.slice(0,6).map(productCard).join("")}
+    </div>
+
+    <div class="section-head">
+      <h2>${t("countries")}</h2>
+    </div>
+
+    <div class="countries">
+
+      <div class="country" onclick="filterCountry('🇭🇹 Haiti')">
+        🇭🇹
+        <b>Haiti</b>
+        <small>Shop local</small>
+      </div>
+
+      <div class="country" onclick="filterCountry('🇺🇸 USA')">
+        🇺🇸
+        <b>USA</b>
+        <small>Shop from USA</small>
+      </div>
+
+      <div class="country" onclick="filterCountry('🇨🇦 Canada')">
+        🇨🇦
+        <b>Canada</b>
+        <small>Shop from Canada</small>
+      </div>
+
+      <div class="country" onclick="filterCountry('🇩🇴 Dominican Republic')">
+        🇩🇴
+        <b>Dominican Republic</b>
+        <small>Shop from DR</small>
+      </div>
+
+      <div class="country" onclick="filterCountry('🇫🇷 France')">
+        🇫🇷
+        <b>France</b>
+        <small>Shop from France</small>
+      </div>
+
+    </div>
+
+    <div class="safety">
+
+      <h3>🛡️ ${t("safety")}</h3>
+
+      <p>${t("safetyText")}</p>
+
+    </div>
+  `;
 }
 
-function back(){
-home();
+function searchProducts(value){
+
+  const q=value.toLowerCase();
+
+  const results=products.filter(p=>
+    p.name.toLowerCase().includes(q) ||
+    p.category.toLowerCase().includes(q) ||
+    p.seller.toLowerCase().includes(q) ||
+    p.country.toLowerCase().includes(q)
+  );
+
+  const box=document.getElementById("homeProducts");
+
+  if(!box)return;
+
+  box.innerHTML=results.length
+    ?results.map(productCard).join("")
+    :`<div class="empty">No products found.</div>`;
 }
 
-function title(name){
-return `<div class="title">
-<button class="back" onclick="home()">‹</button>
-<h2>${name}</h2>
-</div>`;
+function filterCategory(category){
+
+  navActive("navExplore");
+
+  const results=products.filter(p=>p.category===category);
+
+  app.innerHTML=`
+
+    <div class="page-title">
+      <button class="back" onclick="home()">‹</button>
+      <h2>${category}</h2>
+    </div>
+
+    <div class="products">
+      ${results.length
+        ?results.map(productCard).join("")
+        :`<div class="empty">No products found.</div>`
+      }
+    </div>
+  `;
 }
 
-function analyze(){
-app.innerHTML=title("Product Analyzer")+`
-<div class="card">
-<h2>🛍️ Product Analysis</h2>
-<p>For this demo, we'll analyze a sample product.</p>
-<input placeholder="Product name" value="">
-<input placeholder="Product cost" value="">
-<button class="btn" onclick="runAnalysis()">✨ Analyze Product</button>
-</div>
-<div id="analysis"></div>`;
+function filterCountry(country){
+
+  const results=products.filter(p=>p.country===country);
+
+  app.innerHTML=`
+
+    <div class="page-title">
+      <button class="back" onclick="home()">‹</button>
+      <h2>${country}</h2>
+    </div>
+
+    <div class="products">
+      ${results.length
+        ?results.map(productCard).join("")
+        :`<div class="empty">No products found.</div>`
+      }
+    </div>
+  `;
 }
 
-function runAnalysis(){
-  const productName=document.querySelector('input[placeholder="Product name"]').value;
-  currentProductName = productName;
-  const productCost=Number(document.querySelector('input[placeholder="Product cost"]').value);
+function explore(){
 
-  if(!productName){
-    alert("Please enter a product name.");
-    return;
+  navActive("navExplore");
+
+  app.innerHTML=`
+
+    <div class="search">
+      🔎
+      <input
+        placeholder="${t("search")}"
+        oninput="exploreSearch(this.value)"
+      >
+    </div>
+
+    <div class="page-title">
+      <h2>🔎 ${t("explore")}</h2>
+    </div>
+
+    <div class="categories">
+
+      <button class="category" onclick="filterCategory('Fashion')">👗 Fashion</button>
+
+      <button class="category" onclick="filterCategory('Electronics')">📱 Electronics</button>
+
+      <button class="category" onclick="filterCategory('Beauty')">💄 Beauty</button>
+
+      <button class="category" onclick="filterCategory('Home')">🏠 Home</button>
+
+      <button class="category" onclick="filterCategory('Kids')">🧸 Kids</button>
+
+      <button class="category" onclick="filterCategory('Gifts')">🎁 Gifts</button>
+
+    </div>
+
+    <div style="height:15px"></div>
+
+    <div id="exploreProducts" class="products">
+      ${products.map(productCard).join("")}
+    </div>
+  `;
+}
+
+function exploreSearch(value){
+
+  const q=value.toLowerCase();
+
+  const results=products.filter(p=>
+    p.name.toLowerCase().includes(q) ||
+    p.category.toLowerCase().includes(q) ||
+    p.seller.toLowerCase().includes(q)
+  );
+
+  const box=document.getElementById("exploreProducts");
+
+  if(box){
+    box.innerHTML=results.length
+      ?results.map(productCard).join("")
+      :`<div class="empty">No products found.</div>`;
   }
+}
 
-  if(!productCost || productCost<=0){
-    alert("Please enter a valid product cost.");
-    return;
-  }
+function productDetail(id){
 
-  const sellingPrice=Math.ceil((productCost*2.5)/0.99);
-  const profit=sellingPrice-productCost;
-  const margin=(profit/sellingPrice)*100;
+  const p=products.find(x=>x.id===id);
 
-  document.getElementById("analysis").innerHTML=`
+  if(!p)return;
+
+  currentProduct=p;
+
+  app.innerHTML=`
+
+    <div class="page-title">
+      <button class="back" onclick="home()">‹</button>
+      <h2>${p.name}</h2>
+    </div>
+
+    <div class="detail-image">
+      ${p.icon}
+    </div>
+
     <div class="card">
-      <h3>✨ AI Product Insights</h3>
 
-      <p><b>Product:</b> ${productName}</p>
+      <div class="detail-price">
+        $${p.price.toFixed(2)}
+      </div>
 
-      <p><b>Target customer:</b>
-      Shoppers looking for ${productName} for convenient everyday use.</p>
-
-      <p><b>Positioning:</b>
-      Present ${productName} as a useful, problem-solving product with clear everyday benefits.</p>
-
-      <p><b>Suggested selling price:</b></p>
-
-      <div class="price">$${sellingPrice.toFixed(2)}</div>
-
-      <p class="green">
-      <b>Estimated profit:</b> $${profit.toFixed(2)}
+      <p class="rating">
+        ⭐ ${p.rating}
       </p>
 
-      <p><b>Estimated margin:</b> ${margin.toFixed(1)}%</p>
+      <h3>${p.name}</h3>
 
-      <button class="btn" onclick="listing()">Create Product Listing →</button>
+      <p>
+        A product offered by ${p.seller}.
+      </p>
+
+      <p>
+        📍 ${p.country}
+      </p>
+
+      ${p.verified?
+        `<p class="verified">✓ ${t("verified")}</p>`:""}
+
+      <button class="primary" onclick="contactSeller()">
+        💬 ${t("messages")}
+      </button>
+
+      <button class="secondary" onclick="toggleSave(${p.id})">
+        ❤️ ${t("saved")}
+      </button>
+
+    </div>
+
+    <div class="safety">
+      <h3>🛡️ ${t("safety")}</h3>
+      <p>${t("safetyText")}</p>
     </div>
   `;
 }
 
-function listing(){
-const productName = currentProductName || document.querySelector('input[placeholder="Product name"]')?.value || "your product";
-const name = productName.toLowerCase();
-let productType = "product";
-let useCase = "everyday use";
-let features = ["practical design", "easy to use", "made for everyday needs"];
+function toggleSave(id){
 
-if(name.includes("phone") || name.includes("holder") || name.includes("mount")){
-  productType = "phone holder";
-  useCase = "keeping your phone secure and accessible";
-  features = ["secure phone placement", "hands-free viewing", "adjustable positioning"];
-}else if(name.includes("nail") || name.includes("manicure") || name.includes("gel")){
-  productType = "nail kit";
-  useCase = "creating salon-style nails at home";
-  features = ["DIY nail care", "easy application", "at-home manicure convenience"];
-}else if(name.includes("sheet") || name.includes("mattress") || name.includes("bedding")){
-  productType = "bedding product";
-  useCase = "creating a more comfortable bed";
-  features = ["comfortable feel", "bedroom upgrade", "everyday comfort"];
-}else if(name.includes("light") || name.includes("ring light") || name.includes("lamp")){
-  productType = "lighting product";
-  useCase = "improving lighting for photos and videos";
-  features = ["portable lighting", "brighter photos", "easy positioning"];
-}
-app.innerHTML=title("Listing Builder")+`
-<div class="card">
-<h3>Product Title</h3>
-<div class="output">
-${productName} - ${productType} for ${useCase}
-</div>
+  if(savedProducts.includes(id)){
+    savedProducts=savedProducts.filter(x=>x!==id);
+  }else{
+    savedProducts.push(id);
+  }
 
-<h3>Description</h3>
-<div class="output">
-Discover ${productName}, a ${productType} designed for ${useCase}. Key benefits include ${features.join(", ")}.
-</div>
-
-<h3>Keywords</h3>
-<div class="output">
-${productName} • ${productType} • ${useCase} • ${features.join(" • ")}
-</div>
-<h3>✨ Selling Points</h3>
-<div class="output">
-${features.map(f => "• " + f).join("<br>")}
-</div>
-
-<h3>💰 Suggested Pricing</h3>
-<div class="output">
-<label>Product Cost</label>
-<input id="listingCost" type="number" placeholder="Enter your cost">
-
-<button class="btn" onclick="
-const cost=Number(document.getElementById('listingCost').value);
-document.getElementById('listingPrice').innerText=cost>0
-?'Suggested price: $'+(cost*2.5).toFixed(2)+' – $'+(cost*3).toFixed(2)
-:'Enter a product cost above';
-">Calculate Price</button>
-
-<p id="listingPrice">Enter a product cost above</p>
-</div>
-<button class="btn" onclick="alert('Listing copied!')">Copy Listing</button>
-</div>`;
+  if(currentProduct){
+    productDetail(currentProduct.id);
+  }else{
+    home();
+  }
 }
 
-function ads(){
-app.innerHTML=title("Ad Creator")+`
-<div class="card">
-<h3>🎬 TikTok Ad — 15 Seconds</h3>
-<div class="output">
-<strong>0–3 sec:</strong> “Still using a boring water bottle?”
+function saved(){
 
-<strong>3–7 sec:</strong> Show the tumbler and demonstrate the handle.
+  app.innerHTML=`
 
-<strong>7–11 sec:</strong> “Meet the 40 oz tumbler made for your everyday life.”
+    <div class="page-title">
+      <h2>❤️ ${t("saved")}</h2>
+    </div>
 
-<strong>11–15 sec:</strong> “Sip in style. Get yours today!”
-</div>
-<button class="btn" onclick="alert('More video concepts generated!')">Generate More Ideas ✨</button>
-</div>`;
+    ${
+      savedProducts.length
+      ?
+      `<div class="products">
+        ${products
+          .filter(p=>savedProducts.includes(p.id))
+          .map(productCard)
+          .join("")}
+      </div>`
+      :
+      `<div class="empty">
+        ❤️<br><br>
+        ${t("noSaved")}
+      </div>`
+    }
+  `;
 }
 
-function profit(){
-app.innerHTML=title("Profit Calculator")+`
-<div class="card">
-<label>Product Cost</label>
-<input id="cost" type="number" value="12">
+function messages(){
 
-<label>Shipping</label>
-<input id="shipping" type="number" value="4">
+  navActive("navMessages");
 
-<label>Selling Price</label>
-<input id="selling" type="number" value="29.99">
+  app.innerHTML=`
 
-<label>Platform Fees</label>
-<input id="fees" type="number" value="4.50">
+    <div class="page-title">
+      <h2>💬 ${t("messagesTitle")}</h2>
+    </div>
 
-<button class="btn" onclick="calculate()">Calculate Profit</button>
+    <div class="message">
+      <b>👗 Belle Fashion</b>
+      <small>Hi! The dress is still available.</small>
+    </div>
 
-<div id="result"></div>
-</div>`;
+    <div class="message">
+      <b>📿 Kreyol Creations</b>
+      <small>Thank you for your interest!</small>
+    </div>
+
+    <div class="safety">
+      <h3>🛡️ Safety Reminder</h3>
+      <p>
+        Keep your conversation and purchase discussions inside SellSpark.
+        Never share verification codes or send money because someone asks you to.
+      </p>
+    </div>
+  `;
 }
 
-function calculate(){
-let c=Number(cost.value);
-let s=Number(shipping.value);
-let p=Number(selling.value);
-let f=Number(fees.value);
-let profit=p-c-s-f;
-let margin=(profit/p)*100;
+function contactSeller(){
 
-result.innerHTML=`
-<div class="card">
-<p>Estimated profit per sale</p>
-<div class="price green">$${profit.toFixed(2)}</div>
-<p>Estimated margin: ${margin.toFixed(1)}%</p>
-</div>`;
+  openModal(`
+    <button class="close" onclick="closeModal()">×</button>
+
+    <h2>💬 Contact Seller</h2>
+
+    <p>
+      Send a message to <b>${currentProduct.seller}</b>.
+    </p>
+
+    <textarea id="sellerMessage"
+      placeholder="Write your message..."></textarea>
+
+    <button class="primary" onclick="sendMessage()">
+      Send Message
+    </button>
+  `);
 }
 
-function social(){
-app.innerHTML=title("Social Content")+`
-<div class="card">
-<h3>📱 TikTok Caption</h3>
-<div class="output">
-Your new everyday favorite ✨ Stylish, practical and ready to go wherever you do.
+function sendMessage(){
 
-#tumbler #shoppingfinds #smallbusiness #onlineshopping
-</div>
+  const message=document.getElementById("sellerMessage").value.trim();
 
-<h3>Instagram Caption</h3>
-<div class="output">
-Make every sip better ✨ Meet your new everyday tumbler.
-</div>
-
-<button class="btn" onclick="alert('10 social posts generated!')">Generate 10 Posts</button>
-</div>`;
-}
-
-function assistant(){
-app.innerHTML=title("Business Assistant")+`
-<div class="card">
-<h3>🤖 SellSpark AI</h3>
-<p>Ask me about your online business.</p>
-
-<div class="output">
-Hi! I'm your SellSpark business assistant.
-
-Try asking:
-<br><br>
-• What should I sell?
-<br>
-• Give me TikTok ideas.
-<br>
-• How should I price my product?
-<br>
-• Why isn't my product selling?
-<br>
-• Write an ad for me.
-</div>
-
-<input id="question" placeholder="Ask SellSpark...">
-
-<button class="btn" onclick="answer()">Ask AI ✨</button>
-
-<div id="answer"></div>
-</div>`;
-}
-
-async function answer(){
-  const q = document.getElementById("question").value.trim();
-  const answerBox = document.getElementById("answer");
-
-  if(!q){
-    answerBox.innerHTML = `
-      <div class="card">
-        <p>Please enter a question first.</p>
-      </div>
-    `;
+  if(!message){
+    alert("Please write a message.");
     return;
   }
 
-  answerBox.innerHTML = `
-    <div class="card">
-      <p>✨ SellSpark is thinking...</p>
-    </div>
-  `;
+  closeModal();
 
-  try{
-    const response = await fetch( "https://sellspark-ai-rho.vercel.app/api/ask-ai", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        question: q
-      })
-    });
-
-    const data = await response.json();
-
-    if(!response.ok){
-      throw new Error(data.error || "AI request failed.");
-    }
-const cleanAnswer = (data.answer || "No answer returned.")
-  .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-  .replace(/^### (.*)$/gm, "<h3>$1</h3>")
-  .replace(/\n/g, "<br>");
-    answerBox.innerHTML = `
-      <div class="card">
-        <b>🤖 SellSpark:</b>
-        <p>${cleanAnswer}</p>
-      </div>
-    `;
-
-  }catch(error){
-    answerBox.innerHTML = `
-      <div class="card">
-        <h3>⚠️ AI Error</h3>
-        <p>${error.message}</p>
-      </div>
-    `;
-  }
+  alert("Message sent!");
 }
 
-function upgrade(){
-alert("Pro subscriptions will be connected in the production version.");
-} 
-  function uploadProduct(){
+function profile(){
+
+  navActive("navProfile");
+
+  app.innerHTML=`
+
+    <div class="profile-top">
+
+      <div class="avatar">
+        👤
+      </div>
+
+      <h2>My Profile</h2>
+
+      <p>Haitian Marketplace Member</p>
+
+      <button class="secondary" onclick="sell()">
+        ＋ ${t("sell")}
+      </button>
+
+    </div>
+
+    <div class="menu">
+
+      <button onclick="saved()">
+        ❤️ ${t("saved")}
+      </button>
+
+      <button onclick="sellerTools()">
+        🤖 ${t("sellerTools")}
+      </button>
+
+      <button onclick="languageSettings()">
+        🌐 ${t("language")}
+      </button>
+
+      <button onclick="messages()">
+        💬 ${t("messages")}
+      </button>
+
+      <button onclick="settings()">
+        ⚙️ ${t("settings")}
+      </button>
+
+    </div>
+  `;
+}
+
+function languageSettings(){
+
+  openModal(`
+
+    <button class="close" onclick="closeModal()">×</button>
+
+    <h2>🌐 ${t("language")}</h2>
+
+    <div class="language-row">
+
+      <button onclick="setLanguage('ht')">
+        🇭🇹 Kreyòl
+      </button>
+
+      <button onclick="setLanguage('en')">
+        🇺🇸 English
+      </button>
+
+    </div>
+
+    <div class="language-row">
+
+      <button onclick="setLanguage('fr')">
+        🇫🇷 Français
+      </button>
+
+      <button onclick="setLanguage('es')">
+        🇪🇸 Español
+      </button>
+
+    </div>
+
+  `);
+}
+
+function settings(){
+
+  openModal(`
+
+    <button class="close" onclick="closeModal()">×</button>
+
+    <h2>⚙️ ${t("settings")}</h2>
+
+    <div class="card">
+      <b>Account</b>
+      <p>Manage your marketplace account.</p>
+    </div>
+
+    <div class="card">
+      <b>🛡️ Safety</b>
+      <p>Report suspicious sellers or messages.</p>
+    </div>
+
+    <div class="card">
+      <b>🔔 Notifications</b>
+      <p>Control your marketplace notifications.</p>
+    </div>
+
+  `);
+}
+
+/* SELL */
+
+function sell(){
+
+  openModal(`
+
+    <button class="close" onclick="closeModal()">×</button>
+
+    <h2>＋ ${t("sellTitle")}</h2>
+
+    <label>${t("productName")}</label>
+
+    <input id="sellName"
+      placeholder="${t("productName")}">
+
+    <label>${t("price")}</label>
+
+    <input id="sellPrice"
+      type="number"
+      placeholder="$0.00">
+
+    <label>${t("description")}</label>
+
+    <textarea id="sellDescription"
+      placeholder="${t("description")}"></textarea>
+
+    <label>${t("country")}</label>
+
+    <select id="sellCountry">
+
+      <option>🇭🇹 Haiti</option>
+      <option>🇺🇸 USA</option>
+      <option>🇨🇦 Canada</option>
+      <option>🇩🇴 Dominican Republic</option>
+      <option>🇫🇷 France</option>
+      <option>🇧🇸 Bahamas</option>
+
+    </select>
+
+    <button class="primary" onclick="createListing()">
+      ${t("post")}
+    </button>
+
+    <button class="secondary" onclick="aiScan()">
+      🤖 Use AI to create my listing
+    </button>
+
+  `);
+}
+
+function createListing(){
+
+  const name=document.getElementById("sellName").value.trim();
+  const price=Number(document.getElementById("sellPrice").value);
+
+  if(!name || !price){
+    alert("Please enter a product name and price.");
+    return;
+  }
+
+  closeModal();
+
+  alert("Your listing is ready! Seller accounts and live listings will be connected to the marketplace database next.");
+}
+
+/* SELLER TOOLS */
+
+function sellerTools(){
+
+  openModal(`
+
+    <button class="close" onclick="closeModal()">×</button>
+
+    <h2>🤖 ${t("sellerToolsTitle")}</h2>
+
+    <div class="card">
+      <h3>📸 ${t("aiScan")}</h3>
+      <p>Upload a product photo and let AI identify it.</p>
+      <button class="primary" onclick="closeModal();aiScan()">
+        Start AI Scan
+      </button>
+    </div>
+
+    <div class="card">
+      <h3>📝 ${t("listing")}</h3>
+      <p>Create a product title, description and selling points.</p>
+      <button class="primary" onclick="closeModal();listingBuilder()">
+        Open Listing Builder
+      </button>
+    </div>
+
+    <div class="card">
+      <h3>📊 ${t("profit")}</h3>
+      <p>Calculate your estimated profit.</p>
+      <button class="primary" onclick="closeModal();profitCalculator()">
+        Open Calculator
+      </button>
+    </div>
+
+    <div class="card">
+      <h3>🤖 ${t("aiAssistant")}</h3>
+      <p>Ask SellSpark about your business.</p>
+      <button class="primary" onclick="closeModal();assistant()">
+        Ask AI
+      </button>
+    </div>
+
+  `);
+}
+
+/* AI PRODUCT SCAN */
+
+function aiScan(){
+
   const input=document.createElement("input");
+
   input.type="file";
   input.accept="image/*";
 
   input.onchange=function(){
+
     const file=input.files[0];
+
     if(!file)return;
 
     const reader=new FileReader();
 
     reader.onload=function(e){
-      const img=new Image();
 
-      img.onload=async function(){
-        const maxSize=1200;
-        const scale=Math.min(1,maxSize/Math.max(img.width,img.height));
+      const imageData=e.target.result;
 
-        const canvas=document.createElement("canvas");
-        canvas.width=Math.round(img.width*scale);
-        canvas.height=Math.round(img.height*scale);
+      app.innerHTML=`
 
-        const ctx=canvas.getContext("2d");
-        ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        <div class="page-title">
+          <button class="back" onclick="profile()">‹</button>
+          <h2>🤖 AI Product Scan</h2>
+        </div>
 
-        const imageData=canvas.toDataURL("image/jpeg",0.8);
+        <div class="card">
 
-        app.innerHTML=title("AI Product Scan")+`
-          <div class="card">
-            <h3>🤖 AI is identifying your product...</h3>
-            <img src="${imageData}" style="width:100%;border-radius:15px;margin:10px 0;">
-            <p>Please wait a moment.</p>
-          </div>
-        `;
+          <img
+            src="${imageData}"
+            style="width:100%;border-radius:16px"
+          >
 
-        try{
-          const response=await fetch(
-            "https://sellspark-ai-rho.vercel.app/api/analyze-image",
-            {
-              method:"POST",
-              headers:{
-                "Content-Type":"application/json"
-              },
-              body:JSON.stringify({
-                image:imageData
-              })
-            }
-          );
+          <h3>🤖 AI is identifying your product...</h3>
 
-          const data=await response.json();
+          <p>Please wait.</p>
 
-          if(!response.ok){
-            throw new Error(data.error || "AI analysis failed.");
-          }
+        </div>
+      `;
 
-          const result = (data.result || "").trim();
-
-function getSection(name, nextNames = []) {
-  const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  let pattern = escapedName + "\\s*:\\s*([\\s\\S]*?)";
-
-  if (nextNames.length) {
-    pattern += "(?=\\n\\s*(?:" +
-      nextNames.map(n =>
-        n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-      ).join("|") +
-      ")\\s*:|$)";
-  } else {
-    pattern += "$";
-  }
-
-  const match = result.match(new RegExp(pattern, "i"));
-  return match ? match[1].trim() : "";
-}
-
-const sections = [
-  "PRODUCT NAME",
-  "PRODUCT DESCRIPTION",
-  "PRODUCT CATEGORY",
-  "TARGET CUSTOMER",
-  "KEY SELLING POINTS",
-  "POTENTIAL PROBLEMS/COMPETITION",
-  "SUGGESTED SELLING PRICE",
-  "ESTIMATED PROFIT",
-  "PRODUCT LISTING",
-  "TIKTOK/INSTAGRAM AD IDEAS"
-];
-
-function esc(text) {
-  return String(text || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-function formatText(text) {
-  return esc(text)
-    .replace(/\n/g, "<br>")
-    .replace(/•/g, "•");
-}
-
-const productName =
-  getSection("PRODUCT NAME", sections.slice(1)) ||
-  "Unknown product";
-
-const safeName = esc(productName);
-
-const description =
-  getSection("PRODUCT DESCRIPTION", sections.slice(2));
-
-const category =
-  getSection("PRODUCT CATEGORY", sections.slice(3));
-
-const targetCustomer =
-  getSection("TARGET CUSTOMER", sections.slice(4));
-
-const sellingPoints =
-  getSection("KEY SELLING POINTS", sections.slice(5));
-
-const problems =
-  getSection("POTENTIAL PROBLEMS/COMPETITION", sections.slice(6));
-
-const sellingPrice =
-  getSection("SUGGESTED SELLING PRICE", sections.slice(7));
-
-const estimatedProfit =
-  getSection("ESTIMATED PROFIT", sections.slice(8));
-
-const productListing =
-  getSection("PRODUCT LISTING", sections.slice(9));
-
-const adIdeas =
-  getSection("TIKTOK/INSTAGRAM AD IDEAS", []);
-
-app.innerHTML = title("AI Product Analysis") + `
-  <div class="card">
-
-    <h2>🛍️ AI Product Analysis</h2>
-
-    <img src="${imageData}"
-         style="width:100%;border-radius:16px;margin-bottom:16px;">
-
-    <h3>✨ Product Name</h3>
-    <p>${formatText(productName)}</p>
-
-    <h3>📝 Product Description</h3>
-    <p>${formatText(description)}</p>
-
-    <h3>📂 Product Category</h3>
-    <p>${formatText(category)}</p>
-
-    <h3>🎯 Target Customer</h3>
-    <p>${formatText(targetCustomer)}</p>
-
-    <h3>⭐ Key Selling Points</h3>
-    <p>${formatText(sellingPoints)}</p>
-
-    <h3>⚠️ Potential Problems / Competition</h3>
-    <p>${formatText(problems)}</p>
-
-    <h3>💰 Suggested Selling Price</h3>
-    <p>${formatText(sellingPrice)}</p>
-
-    <h3>📈 Estimated Profit</h3>
-    <p>${formatText(estimatedProfit)}</p>
-
-    <h3>🛒 Product Listing</h3>
-    <div class="card">
-      <p>${formatText(productListing)}</p>
-    </div>
-
-    <h3>🎥 TikTok / Instagram Ad Ideas</h3>
-    <div class="card">
-      <p>${formatText(adIdeas)}</p>
-    </div>
-
-    <h3>Product Name</h3>
-    <input
-      placeholder="Product name"
-      value="${safeName}"
-    >
-
-    <h3>Product Cost</h3>
-    
-<input
-  placeholder="Product cost"
-  value=""
->
-
-    <button class="btn" onclick="runAnalysis()">
-      ✨ Analyze Product
-    </button>
-
-  </div>
-
-  <div id="analysis"></div>
-`;
-
-        }catch(error){
-
-          app.innerHTML=title("AI Product Scan")+`
-            <div class="card">
-              <h3>⚠️ AI Scan Error</h3>
-              <p>${error.message}</p>
-              <button class="btn" onclick="uploadProduct()">
-                Try Again
-              </button>
-            </div>
-          `;
-        }
-      };
-
-      img.src=e.target.result;
+      analyzeImage(imageData);
     };
 
     reader.readAsDataURL(file);
   };
 
   input.click();
+}
+
+async function analyzeImage(imageData){
+
+  try{
+
+    const response=await fetch(
+      "https://sellspark-ai-rho.vercel.app/api/analyze-image",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          image:imageData
+        })
+      }
+    );
+
+    const data=await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error || "AI analysis failed.");
+    }
+
+    const result=data.result || "No result returned.";
+
+    app.innerHTML=`
+
+      <div class="page-title">
+        <button class="back" onclick="profile()">‹</button>
+        <h2>✨ AI Product Results</h2>
+      </div>
+
+      <div class="card">
+
+        <div class="output">
+          ${escapeHTML(result).replace(/\n/g,"<br>")}
+        </div>
+
+        <button class="primary" onclick="listingBuilder()">
+          📝 Create Listing
+        </button>
+
+      </div>
+    `;
+
+  }catch(error){
+
+    app.innerHTML=`
+
+      <div class="card">
+
+        <h2>⚠️ AI Scan Error</h2>
+
+        <p>${escapeHTML(error.message)}</p>
+
+        <button class="primary" onclick="aiScan()">
+          Try Again
+        </button>
+
+      </div>
+    `;
   }
+}
+
+/* LISTING BUILDER */
+
+function listingBuilder(){
+
+  app.innerHTML=`
+
+    <div class="page-title">
+      <button class="back" onclick="profile()">‹</button>
+      <h2>📝 ${t("listing")}</h2>
+    </div>
+
+    <div class="card">
+
+      <label>${t("productName")}</label>
+
+      <input id="listingName"
+        placeholder="Example: Wireless Phone Holder">
+
+      <label>Product type</label>
+
+      <input id="listingType"
+        placeholder="Example: Phone accessory">
+
+      <label>Key benefits</label>
+
+      <textarea id="listingBenefits"
+        placeholder="Example: hands-free, adjustable, secure"></textarea>
+
+      <button class="primary" onclick="generateListing()">
+        ✨ Create Listing
+      </button>
+
+      <div id="listingResult"></div>
+
+    </div>
+  `;
+}
+
+function generateListing(){
+
+  const name=document.getElementById("listingName").value.trim();
+  const type=document.getElementById("listingType").value.trim();
+  const benefits=document.getElementById("listingBenefits").value.trim();
+
+  if(!name){
+    alert("Enter a product name.");
+    return;
+  }
+
+  document.getElementById("listingResult").innerHTML=`
+
+    <div class="card">
+
+      <h3>Product Title</h3>
+
+      <div class="output">
+        ${escapeHTML(name)} — ${escapeHTML(type || "Everyday Product")}
+      </div>
+
+      <h3>Description</h3>
+
+      <div class="output">
+        Discover ${escapeHTML(name)}, designed to make everyday life easier.
+        ${benefits
+          ?"Key benefits include "+escapeHTML(benefits)+"."
+          :"Practical, convenient and easy to use."
+        }
+      </div>
+
+      <h3>Keywords</h3>
+
+      <div class="output">
+        ${escapeHTML(name)} • ${escapeHTML(type || "product")} • shopping • everyday
+      </div>
+
+      <button class="primary" onclick="alert('Listing copied!')">
+        Copy Listing
+      </button>
+
+    </div>
+  `;
+}
+
+/* PROFIT */
+
+function profitCalculator(){
+
+  app.innerHTML=`
+
+    <div class="page-title">
+      <button class="back" onclick="profile()">‹</button>
+      <h2>📊 ${t("profit")}</h2>
+    </div>
+
+    <div class="card">
+
+      <label>Product Cost</label>
+      <input id="profitCost" type="number" value="12">
+
+      <label>Shipping</label>
+      <input id="profitShipping" type="number" value="4">
+
+      <label>Selling Price</label>
+      <input id="profitSelling" type="number" value="29.99">
+
+      <label>Platform Fees</label>
+      <input id="profitFees" type="number" value="0">
+
+      <button class="primary" onclick="calculateProfit()">
+        Calculate
+      </button>
+
+      <div id="profitResult"></div>
+
+    </div>
+  `;
+}
+
+function calculateProfit(){
+
+  const cost=Number(document.getElementById("profitCost").value);
+  const shipping=Number(document.getElementById("profitShipping").value);
+  const selling=Number(document.getElementById("profitSelling").value);
+  const fees=Number(document.getElementById("profitFees").value);
+
+  const profit=selling-cost-shipping-fees;
+  const margin=selling>0?(profit/selling)*100:0;
+
+  document.getElementById("profitResult").innerHTML=`
+
+    <div class="card">
+
+      <p>Estimated profit per sale</p>
+
+      <div class="detail-price">
+        $${profit.toFixed(2)}
+      </div>
+
+      <p>
+        Estimated margin:
+        <b>${margin.toFixed(1)}%</b>
+      </p>
+
+    </div>
+  `;
+}
+
+/* AI ASSISTANT */
+
+function assistant(){
+
+  app.innerHTML=`
+
+    <div class="page-title">
+      <button class="back" onclick="profile()">‹</button>
+      <h2>🤖 SellSpark AI</h2>
+    </div>
+
+    <div class="card">
+
+      <p>
+        Ask SellSpark about selling products, pricing,
+        listings or marketing.
+      </p>
+
+      <div class="output">
+
+        Try asking:
+
+        <br><br>
+
+        • What should I sell?
+
+        <br>
+        • How should I price my product?
+
+        <br>
+        • Write a description for me.
+
+        <br>
+        • Give me TikTok ideas.
+
+      </div>
+
+      <input
+        id="question"
+        placeholder="Ask SellSpark..."
+      >
+
+      <button class="primary" onclick="answerAI()">
+        Ask AI ✨
+      </button>
+
+      <div id="answer"></div>
+
+    </div>
+  `;
+}
+
+async function answerAI(){
+
+  const q=document.getElementById("question").value.trim();
+
+  const answerBox=document.getElementById("answer");
+
+  if(!q){
+    alert("Please enter a question.");
+    return;
+  }
+
+  answerBox.innerHTML=`
+
+    <div class="card">
+      🤖 SellSpark is thinking...
+    </div>
+  `;
+
+  try{
+
+    const response=await fetch(
+      "https://sellspark-ai-rho.vercel.app/api/ask-ai",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          question:q
+        })
+      }
+    );
+
+    const data=await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error || "AI request failed.");
+    }
+
+    const answer=data.answer || "No answer returned.";
+
+    answerBox.innerHTML=`
+
+      <div class="card">
+
+        <b>🤖 SellSpark</b>
+
+        <p>
+          ${escapeHTML(answer).replace(/\n/g,"<br>")}
+        </p>
+
+      </div>
+    `;
+
+  }catch(error){
+
+    answerBox.innerHTML=`
+
+      <div class="card">
+
+        <h3>⚠️ AI Error</h3>
+
+        <p>${escapeHTML(error.message)}</p>
+
+      </div>
+    `;
+  }
+}
+
+/* NOTIFICATIONS */
+
+function notifications(){
+
+  openModal(`
+
+    <button class="close" onclick="closeModal()">×</button>
+
+    <h2>🔔 ${t("notifications")}</h2>
+
+    <div class="empty">
+      🔔<br><br>
+      ${t("noNotifications")}
+    </div>
+
+  `);
+}
+
+/* MODAL */
+
+function openModal(content){
+
+  document.getElementById("modalBox").innerHTML=content;
+
+  document.getElementById("modal").classList.add("show");
+}
+
+function closeModal(){
+
+  document.getElementById("modal").classList.remove("show");
+}
+
+document.getElementById("modal").onclick=function(e){
+
+  if(e.target===this){
+    closeModal();
+  }
+};
+
+/* SECURITY */
+
+function escapeHTML(text){
+
+  return String(text || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+/* START */
 
 home();
 
