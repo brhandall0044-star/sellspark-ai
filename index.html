@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SellSpark Marketplace</title>
+<title>Tet Ansanm — Haitian Marketplace</title>
 
 <style>
 *{
@@ -548,7 +548,7 @@ nav button.active{
 <div class="app">
 
 <header>
-  <div class="logo">🛍️ SellSpark <span>Market</span></div>
+  <div class="logo">🛍️ Tet Ansanm <span>Market</span></div>
 
   <div class="header-actions">
     <button class="icon-btn" onclick="notifications()">🔔</button>
@@ -669,7 +669,7 @@ const translations={
     seeAll:"See All",
     countries:"Shop From Around The World",
     safety:"Shop safely",
-    safetyText:"Keep conversations inside SellSpark. Never send verification codes, gift cards, or money to someone you don't know.",
+    safetyText:"Keep conversations inside Tet Ansanm. Never send verification codes, gift cards, or money to someone you don't know.",
     verified:"Verified Seller",
     saved:"Saved",
     noSaved:"Products you save will appear here.",
@@ -708,7 +708,7 @@ const translations={
     seeAll:"Gade tout",
     countries:"Achte nan lemonn",
     safety:"Achte an sekirite",
-    safetyText:"Kenbe konvèsasyon yo andedan SellSpark. Pa janm voye kòd verifikasyon, kat kado, oswa lajan bay moun ou pa konnen.",
+    safetyText:"Kenbe konvèsasyon yo andedan Tet Ansanm. Pa janm voye kòd verifikasyon, kat kado, oswa lajan bay moun ou pa konnen.",
     verified:"Vandè verifye",
     saved:"Sove",
     noSaved:"Pwodwi ou sove yo ap parèt isit la.",
@@ -747,7 +747,7 @@ const translations={
     seeAll:"Voir tout",
     countries:"Acheter dans le monde",
     safety:"Achetez en sécurité",
-    safetyText:"Gardez les conversations dans SellSpark. N'envoyez jamais de codes de vérification, cartes cadeaux ou argent à des inconnus.",
+    safetyText:"Gardez les conversations dans Tet Ansanm. N'envoyez jamais de codes de vérification, cartes cadeaux ou argent à des inconnus.",
     verified:"Vendeur vérifié",
     saved:"Enregistrés",
     noSaved:"Les produits que vous enregistrez apparaîtront ici.",
@@ -786,7 +786,7 @@ const translations={
     seeAll:"Ver todo",
     countries:"Comprar desde todo el mundo",
     safety:"Compra de forma segura",
-    safetyText:"Mantén las conversaciones dentro de SellSpark. Nunca envíes códigos de verificación, tarjetas de regalo o dinero a desconocidos.",
+    safetyText:"Mantén las conversaciones dentro de Tet Ansanm. Nunca envíes códigos de verificación, tarjetas de regalo o dinero a desconocidos.",
     verified:"Vendedor verificado",
     saved:"Guardados",
     noSaved:"Los productos que guardes aparecerán aquí.",
@@ -1474,7 +1474,7 @@ function sellerTools(){
 
     <div class="card">
       <h3>🤖 ${t("aiAssistant")}</h3>
-      <p>Ask SellSpark about your business.</p>
+      <p>Ask Tet Ansanm about your business.</p>
       <button class="primary" onclick="closeModal();assistant()">
         Ask AI
       </button>
@@ -1753,13 +1753,13 @@ function assistant(){
 
     <div class="page-title">
       <button class="back" onclick="profile()">‹</button>
-      <h2>🤖 SellSpark AI</h2>
+      <h2>🤖 Tet Ansanm AI</h2>
     </div>
 
     <div class="card">
 
       <p>
-        Ask SellSpark about selling products, pricing,
+        Ask Tet Ansanm about selling products, pricing,
         listings or marketing.
       </p>
 
@@ -1784,7 +1784,7 @@ function assistant(){
 
       <input
         id="question"
-        placeholder="Ask SellSpark..."
+        placeholder="Tet Ansanm..."
       >
 
       <button class="primary" onclick="answerAI()">
@@ -1811,7 +1811,7 @@ async function answerAI(){
   answerBox.innerHTML=`
 
     <div class="card">
-      🤖 SellSpark is thinking...
+      🤖 Tet Ansanm is thinking...
     </div>
   `;
 
@@ -1842,7 +1842,7 @@ async function answerAI(){
 
       <div class="card">
 
-        <b>🤖 SellSpark</b>
+        <b>🤖 Tet Ansanm</b>
 
         <p>
           ${escapeHTML(answer).replace(/\n/g,"<br>")}
