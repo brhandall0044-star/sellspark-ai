@@ -1130,7 +1130,13 @@ function home(){
   navActive("navHome");
 
   app.innerHTML=`
-
+<div class="search" style="margin-bottom:24px;">
+      🔎
+      <input
+        placeholder="${t("search")}"
+        oninput="searchProducts(this.value)"
+      >
+    </div>
   <div style="padding:16px 0 30px;">
 
     <div style="
@@ -1183,13 +1189,7 @@ function home(){
     </div>
 
 
-    <div class="search" style="margin-bottom:24px;">
-      🔎
-      <input
-        placeholder="${t("search")}"
-        oninput="searchProducts(this.value)"
-      >
-    </div>
+    
 
 
     <div class="section-head">
