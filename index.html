@@ -1130,289 +1130,737 @@ function home(){
   navActive("navHome");
 
   app.innerHTML=`
-<div class="search" style="margin-bottom:24px;">
-      🔎
-      <input
-        placeholder="${t("search")}"
-        oninput="searchProducts(this.value)"
-      >
-    </div>
-  <div style="padding:16px 0 30px;">
 
-    <div style="
-      background:linear-gradient(135deg,#063b7a,#0b63c7);
-      border-radius:24px;
-      padding:28px 22px;
-      color:white;
-      margin-bottom:22px;
-      box-shadow:0 8px 24px rgba(0,0,0,.12);
-    ">
+    <style>
+      .ta-home{
+        background:#f7f8fb;
+        color:#14213d;
+        padding-bottom:40px;
+      }
 
-      <div style="font-size:42px;margin-bottom:10px;">🇭🇹</div>
+      .ta-hero{
+        margin:0 0 22px;
+        min-height:500px;
+        padding:22px 18px 24px;
+        border-radius:0 0 30px 30px;
+        background:
+          linear-gradient(180deg,rgba(0,45,100,.18),rgba(0,45,100,.72)),
+          linear-gradient(135deg,#0878bd,#0752a4 48%,#13a4d9);
+        position:relative;
+        overflow:hidden;
+      }
 
-      <h1 style="
-        font-size:32px;
-        line-height:1.1;
-        margin:0 0 12px;
+      .ta-hero:before{
+        content:"🌴";
+        position:absolute;
+        right:-10px;
+        top:35px;
+        font-size:120px;
+        opacity:.35;
+        transform:rotate(-8deg);
+      }
+
+      .ta-hero:after{
+        content:"🏝️";
+        position:absolute;
+        right:15px;
+        bottom:85px;
+        font-size:90px;
+        opacity:.5;
+      }
+
+      .ta-brand{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        background:white;
+        color:#14213d;
+        padding:12px 14px;
+        border-radius:18px;
+        margin-bottom:28px;
+        box-shadow:0 5px 18px rgba(0,0,0,.12);
+        position:relative;
+        z-index:2;
+      }
+
+      .ta-brand-logo{
+        font-size:34px;
+      }
+
+      .ta-brand-name{
+        font-size:22px;
         font-weight:800;
-      ">
-        Support Haitian.<br>
-        Shop Global.
-      </h1>
+      }
 
-      <p style="
+      .ta-brand-name span{
+        color:#e31837;
+      }
+
+      .ta-brand-sub{
+        display:block;
+        font-size:11px;
+        font-weight:500;
+        color:#657086;
+        margin-top:2px;
+      }
+
+      .ta-flag{
+        font-size:42px;
+        margin-top:20px;
+        position:relative;
+        z-index:2;
+      }
+
+      .ta-hero h1{
+        color:white;
+        font-size:38px;
+        line-height:1.05;
+        margin:12px 0 14px;
+        max-width:500px;
+        font-weight:850;
+        position:relative;
+        z-index:2;
+      }
+
+      .ta-hero p{
+        color:white;
         font-size:17px;
+        line-height:1.45;
+        margin:0 0 22px;
+        max-width:440px;
+        position:relative;
+        z-index:2;
+      }
+
+      .ta-search{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        background:white;
+        border-radius:18px;
+        padding:7px 14px;
+        box-shadow:0 8px 25px rgba(0,0,0,.18);
+        margin:12px 0 14px;
+        position:relative;
+        z-index:5;
+      }
+
+      .ta-search-icon{
+        font-size:25px;
+      }
+
+      .ta-search input{
+        border:0;
+        outline:0;
+        width:100%;
+        font-size:16px;
+        background:transparent;
+        color:#14213d;
+        padding:12px 4px;
+      }
+
+      .ta-sell{
+        width:100%;
+        border:0;
+        border-radius:15px;
+        background:#e31837;
+        color:white;
+        padding:15px 20px;
+        font-size:17px;
+        font-weight:800;
+        box-shadow:0 6px 15px rgba(227,24,55,.3);
+        cursor:pointer;
+        position:relative;
+        z-index:5;
+      }
+
+      .ta-section{
+        padding:0 18px;
+        margin-bottom:28px;
+      }
+
+      .ta-section-head{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        margin-bottom:14px;
+      }
+
+      .ta-section-head h2{
+        margin:0;
+        font-size:25px;
+        font-weight:850;
+      }
+
+      .ta-see{
+        color:#e31837;
+        font-weight:800;
+        border:0;
+        background:transparent;
+        font-size:15px;
+        cursor:pointer;
+      }
+
+      .ta-quick{
+        display:flex;
+        gap:12px;
+        overflow-x:auto;
+        padding:3px 0 10px;
+        scrollbar-width:none;
+      }
+
+      .ta-quick::-webkit-scrollbar{
+        display:none;
+      }
+
+      .ta-quick-card{
+        min-width:82px;
+        text-align:center;
+        border:0;
+        background:transparent;
+        cursor:pointer;
+      }
+
+      .ta-quick-icon{
+        width:64px;
+        height:64px;
+        margin:auto;
+        border-radius:50%;
+        background:white;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:32px;
+        box-shadow:0 3px 12px rgba(0,0,0,.08);
+      }
+
+      .ta-quick-card span{
+        display:block;
+        margin-top:7px;
+        font-size:12px;
+        font-weight:700;
+        color:#26344d;
+      }
+
+      .ta-feature-grid{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:14px;
+      }
+
+      .ta-feature{
+        min-height:180px;
+        border-radius:20px;
+        overflow:hidden;
+        position:relative;
+        box-shadow:0 4px 15px rgba(0,0,0,.08);
+      }
+
+      .ta-feature-bg{
+        height:180px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:80px;
+      }
+
+      .ta-feature:nth-child(1) .ta-feature-bg{
+        background:linear-gradient(135deg,#ffd5d9,#f7a8b8);
+      }
+
+      .ta-feature:nth-child(2) .ta-feature-bg{
+        background:linear-gradient(135deg,#d8f0d3,#a8d7a0);
+      }
+
+      .ta-feature:nth-child(3) .ta-feature-bg{
+        background:linear-gradient(135deg,#d8e5ff,#a9c5ff);
+      }
+
+      .ta-feature:nth-child(4) .ta-feature-bg{
+        background:linear-gradient(135deg,#fff0bf,#ffe083);
+      }
+
+      .ta-feature-title{
+        position:absolute;
+        left:14px;
+        bottom:13px;
+        right:10px;
+        color:white;
+        font-size:18px;
+        font-weight:850;
+        text-shadow:0 2px 7px rgba(0,0,0,.65);
+      }
+
+      .ta-country-row{
+        display:flex;
+        gap:12px;
+        overflow-x:auto;
+        scrollbar-width:none;
+        padding-bottom:5px;
+      }
+
+      .ta-country-row::-webkit-scrollbar{
+        display:none;
+      }
+
+      .ta-country{
+        min-width:145px;
+        background:white;
+        border-radius:18px;
+        padding:18px 15px;
+        box-shadow:0 3px 12px rgba(0,0,0,.07);
+        cursor:pointer;
+      }
+
+      .ta-country-flag{
+        font-size:35px;
+      }
+
+      .ta-country strong{
+        display:block;
+        font-size:18px;
+        margin-top:6px;
+      }
+
+      .ta-country small{
+        color:#737b8a;
+        display:block;
+        margin-top:4px;
+      }
+
+      .ta-popular-grid{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:14px;
+      }
+
+      .ta-popular{
+        background:white;
+        border-radius:20px;
+        overflow:hidden;
+        box-shadow:0 3px 12px rgba(0,0,0,.07);
+        cursor:pointer;
+      }
+
+      .ta-popular-img{
+        height:145px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:75px;
+      }
+
+      .ta-popular:nth-child(1) .ta-popular-img{
+        background:#ffe9df;
+      }
+
+      .ta-popular:nth-child(2) .ta-popular-img{
+        background:#e1ecff;
+      }
+
+      .ta-popular:nth-child(3) .ta-popular-img{
+        background:#fff4d5;
+      }
+
+      .ta-popular:nth-child(4) .ta-popular-img{
+        background:#e1f3df;
+      }
+
+      .ta-popular:nth-child(5) .ta-popular-img{
+        background:#eee4ff;
+      }
+
+      .ta-popular:nth-child(6) .ta-popular-img{
+        background:#dff6f3;
+      }
+
+      .ta-popular-name{
+        padding:13px;
+        font-weight:800;
+        font-size:15px;
+      }
+
+      .ta-safe{
+        background:#fff9eb;
+        border:1px solid #f1dfae;
+        border-radius:22px;
+        padding:20px;
+      }
+
+      .ta-safe h3{
+        margin:0 0 10px;
+        font-size:20px;
+      }
+
+      .ta-safe p{
+        margin:0;
+        color:#687080;
         line-height:1.5;
-        margin:0 0 20px;
-        opacity:.95;
-      ">
-        Buy. Sell. Connect.<br>
-        Together We Grow.
-      </p>
+      }
 
-      <button
-        class="sell-btn"
-        onclick="sell()"
-        style="
-          background:#e31837;
-          color:white;
-          border:0;
-          border-radius:12px;
-          padding:14px 22px;
-          font-size:16px;
-          font-weight:700;
-        "
-      >
-        + ${t("sell")}
-      </button>
+      @media(min-width:700px){
+        .ta-hero{
+          margin:20px;
+          border-radius:28px;
+        }
 
-    </div>
+        .ta-section{
+          max-width:900px;
+          margin-left:auto;
+          margin-right:auto;
+        }
 
+        .ta-feature-grid,
+        .ta-popular-grid{
+          grid-template-columns:repeat(3,1fr);
+        }
+      }
+    </style>
 
-    
+    <div class="ta-home">
 
+      <!-- HERO -->
+      <div class="ta-hero">
 
-    <div class="section-head">
-      <h2>${t("categories")}</h2>
-      <button onclick="explore()">${t("seeAll")}</button>
-    </div>
-
-
-    <div class="categories">
-
-      <button class="category" onclick="filterCategory('Fashion')">
-        👗 Fashion
-      </button>
-
-      <button class="category" onclick="filterCategory('Electronics')">
-        📱 Electronics
-      </button>
-
-      <button class="category" onclick="filterCategory('Beauty')">
-        💄 Beauty
-      </button>
-
-      <button class="category" onclick="filterCategory('Home')">
-        🏠 Home
-      </button>
-
-      <button class="category" onclick="filterCategory('Gifts')">
-        🎁 Gifts
-      </button>
-
-      <button class="category" onclick="filterCategory('Kids')">
-        🎒 Kids
-      </button>
-
-    </div>
-
-
-    <div class="section-head" style="margin-top:28px;">
-      <h2>Shop by Country</h2>
-      <button onclick="explore()">See All</button>
-    </div>
-
-
-    <div style="
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      margin-bottom:28px;
-    ">
-
-      <div class="country" onclick="filterCategory('Gifts')">
-        🇭🇹
-        <b>Haiti</b>
-        <small>Shop local</small>
-      </div>
-
-      <div class="country">
-        🇺🇸
-        <b>USA</b>
-        <small>Shop from USA</small>
-      </div>
-
-      <div class="country">
-        🇨🇦
-        <b>Canada</b>
-        <small>Shop from Canada</small>
-      </div>
-
-    </div>
-
-
-    <div class="section-head">
-      <h2>Popular Categories</h2>
-      <button onclick="explore()">See All</button>
-    </div>
-
-
-    <div style="
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-      margin-bottom:30px;
-    ">
-
-      <div style="
-        background:#fff0e8;
-        border-radius:18px;
-        padding:22px;
-        text-align:center;
-        font-size:42px;
-      ">
-        👗
-        <div style="
-          font-size:16px;
-          font-weight:700;
-          margin-top:8px;
-        ">
-          Fashion
+        <div class="ta-brand">
+          <div class="ta-brand-logo">🛍️</div>
+          <div>
+            <div class="ta-brand-name">
+              Tet <span>Ansanm</span>
+            </div>
+            <span class="ta-brand-sub">
+              Haitian Marketplace
+            </span>
+          </div>
         </div>
-      </div>
 
-      <div style="
-        background:#eaf5ea;
-        border-radius:18px;
-        padding:22px;
-        text-align:center;
-        font-size:42px;
-      ">
-        🎨
-        <div style="
-          font-size:16px;
-          font-weight:700;
-          margin-top:8px;
-        ">
-          Handmade
+        <div class="ta-flag">🇭🇹</div>
+
+        <h1>
+          Support Haitian.<br>
+          Shop Global.
+        </h1>
+
+        <p>
+          Buy. Sell. Connect.<br>
+          Together We Grow.
+        </p>
+
+        <div class="ta-search">
+          <span class="ta-search-icon">🔍</span>
+          <input
+            placeholder="Search products..."
+            oninput="searchProducts(this.value)"
+          >
         </div>
+
+        <button
+          class="ta-sell"
+          onclick="sell()"
+        >
+          ＋ Sell Something
+        </button>
+
       </div>
 
-      <div style="
-        background:#edf3ff;
-        border-radius:18px;
-        padding:22px;
-        text-align:center;
-        font-size:42px;
-      ">
-        📱
-        <div style="
-          font-size:16px;
-          font-weight:700;
-          margin-top:8px;
-        ">
-          Electronics
+
+      <!-- QUICK CATEGORIES -->
+      <div class="ta-section">
+
+        <div class="ta-quick">
+
+          <button
+            class="ta-quick-card"
+            onclick="filterCategory('Fashion')"
+          >
+            <div class="ta-quick-icon">👗</div>
+            <span>Fashion</span>
+          </button>
+
+          <button
+            class="ta-quick-card"
+            onclick="filterCategory('Electronics')"
+          >
+            <div class="ta-quick-icon">📱</div>
+            <span>Electronics</span>
+          </button>
+
+          <button
+            class="ta-quick-card"
+            onclick="filterCategory('Beauty')"
+          >
+            <div class="ta-quick-icon">💄</div>
+            <span>Beauty</span>
+          </button>
+
+          <button
+            class="ta-quick-card"
+            onclick="filterCategory('Home')"
+          >
+            <div class="ta-quick-icon">🏠</div>
+            <span>Home</span>
+          </button>
+
+          <button
+            class="ta-quick-card"
+            onclick="explore()"
+          >
+            <div class="ta-quick-icon">▦</div>
+            <span>More</span>
+          </button>
+
         </div>
+
       </div>
 
-      <div style="
-        background:#fff6df;
-        border-radius:18px;
-        padding:22px;
-        text-align:center;
-        font-size:42px;
-      ">
-        💄
-        <div style="
-          font-size:16px;
-          font-weight:700;
-          margin-top:8px;
-        ">
-          Beauty
+
+      <!-- FEATURED CATEGORIES -->
+      <div class="ta-section">
+
+        <div class="ta-section-head">
+          <h2>Featured Categories</h2>
+
+          <button
+            class="ta-see"
+            onclick="explore()"
+          >
+            See All
+          </button>
         </div>
+
+        <div class="ta-feature-grid">
+
+          <div
+            class="ta-feature"
+            onclick="filterCategory('Fashion')"
+          >
+            <div class="ta-feature-bg">
+              👗
+            </div>
+
+            <div class="ta-feature-title">
+              Haitian Fashion
+            </div>
+          </div>
+
+
+          <div
+            class="ta-feature"
+            onclick="filterCategory('Handmade')"
+          >
+            <div class="ta-feature-bg">
+              🏺
+            </div>
+
+            <div class="ta-feature-title">
+              Haitian Handmade
+            </div>
+          </div>
+
+
+          <div
+            class="ta-feature"
+            onclick="filterCategory('Electronics')"
+          >
+            <div class="ta-feature-bg">
+              🎧
+            </div>
+
+            <div class="ta-feature-title">
+              Electronics
+            </div>
+          </div>
+
+
+          <div
+            class="ta-feature"
+            onclick="filterCategory('Beauty')"
+          >
+            <div class="ta-feature-bg">
+              💄
+            </div>
+
+            <div class="ta-feature-title">
+              Beauty
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SHOP BY COUNTRY -->
+      <div class="ta-section">
+
+        <div class="ta-section-head">
+
+          <h2>Shop by Country</h2>
+
+          <button
+            class="ta-see"
+            onclick="explore()"
+          >
+            See All
+          </button>
+
+        </div>
+
+        <div class="ta-country-row">
+
+          <div
+            class="ta-country"
+            onclick="explore()"
+          >
+            <div class="ta-country-flag">🇭🇹</div>
+            <strong>Haiti</strong>
+            <small>Shop local</small>
+          </div>
+
+          <div
+            class="ta-country"
+            onclick="explore()"
+          >
+            <div class="ta-country-flag">🇺🇸</div>
+            <strong>USA</strong>
+            <small>Shop from USA</small>
+          </div>
+
+          <div
+            class="ta-country"
+            onclick="explore()"
+          >
+            <div class="ta-country-flag">🇨🇦</div>
+            <strong>Canada</strong>
+            <small>Shop from Canada</small>
+          </div>
+
+          <div
+            class="ta-country"
+            onclick="explore()"
+          >
+            <div class="ta-country-flag">🇩🇴</div>
+            <strong>Dominican Republic</strong>
+            <small>Shop from DR</small>
+          </div>
+
+          <div
+            class="ta-country"
+            onclick="explore()"
+          >
+            <div class="ta-country-flag">🇫🇷</div>
+            <strong>France</strong>
+            <small>Shop from France</small>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- POPULAR CATEGORIES -->
+      <div class="ta-section">
+
+        <div class="ta-section-head">
+
+          <h2>Popular Categories</h2>
+
+          <button
+            class="ta-see"
+            onclick="explore()"
+          >
+            See All
+          </button>
+
+        </div>
+
+        <div class="ta-popular-grid">
+
+          <div
+            class="ta-popular"
+            onclick="filterCategory('Fashion')"
+          >
+            <div class="ta-popular-img">👗</div>
+            <div class="ta-popular-name">
+              Fashion
+            </div>
+          </div>
+
+          <div
+            class="ta-popular"
+            onclick="filterCategory('Electronics')"
+          >
+            <div class="ta-popular-img">🎧</div>
+            <div class="ta-popular-name">
+              Electronics
+            </div>
+          </div>
+
+          <div
+            class="ta-popular"
+            onclick="filterCategory('Beauty')"
+          >
+            <div class="ta-popular-img">💄</div>
+            <div class="ta-popular-name">
+              Beauty
+            </div>
+          </div>
+
+          <div
+            class="ta-popular"
+            onclick="filterCategory('Home')"
+          >
+            <div class="ta-popular-img">🛋️</div>
+            <div class="ta-popular-name">
+              Home
+            </div>
+          </div>
+
+          <div
+            class="ta-popular"
+            onclick="filterCategory('Handmade')"
+          >
+            <div class="ta-popular-img">🏺</div>
+            <div class="ta-popular-name">
+              Handmade
+            </div>
+          </div>
+
+          <div
+            class="ta-popular"
+            onclick="filterCategory('Health')"
+          >
+            <div class="ta-popular-img">🧴</div>
+            <div class="ta-popular-name">
+              Health & Wellness
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SAFETY -->
+      <div class="ta-section">
+
+        <div class="ta-safe">
+
+          <h3>
+            🛡️ Shop safely
+          </h3>
+
+          <p>
+            Keep conversations inside Tet Ansanm.
+            Never send verification codes, gift cards,
+            or money to someone you don't know.
+          </p>
+
+        </div>
+
       </div>
 
     </div>
-
-
-    <div class="section-head">
-      <h2>${t("trending")}</h2>
-      <button onclick="explore()">See All</button>
-    </div>
-
-
-    <div id="homeProducts" class="products">
-      ${products.slice(0,6).map(productCard).join("")}
-    </div>
-
-
-    <div class="section-head" style="margin-top:30px;">
-      <h2>New Arrivals</h2>
-      <button onclick="explore()">See All</button>
-    </div>
-
-
-    <div class="products">
-      ${products.slice(0,4).map(productCard).join("")}
-    </div>
-
-
-    <div class="section-head" style="margin-top:30px;">
-      <h2>${t("countries")}</h2>
-    </div>
-
-
-    <div class="countries">
-
-      <div class="country">
-        🇭🇹
-        <b>Haiti</b>
-        <small>Shop local</small>
-      </div>
-
-      <div class="country">
-        🇺🇸
-        <b>USA</b>
-        <small>Shop from USA</small>
-      </div>
-
-      <div class="country">
-        🇨🇦
-        <b>Canada</b>
-        <small>Shop from Canada</small>
-      </div>
-
-      <div class="country">
-        🇩🇴
-        <b>Dominican Republic</b>
-        <small>Shop from DR</small>
-      </div>
-
-      <div class="country">
-        🇫🇷
-        <b>France</b>
-        <small>Shop from France</small>
-      </div>
-
-    </div>
-
-
-    <div class="safety" style="margin-top:28px;">
-      <h3>🛡️ ${t("safety")}</h3>
-      <p>${t("safetyText")}</p>
-    </div>
-
-  </div>
 
   `;
 }
