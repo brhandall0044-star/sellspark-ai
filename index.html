@@ -2032,7 +2032,13 @@ function toggleCountrySection(){
     row.style.display = row.style.display === 'none' ? 'flex' : 'none';
   }
 }
-function explore(){
+function toggleExploreCountrySection(){
+  const list = document.querySelector('.ta-explore-country-list');
+  if(list){
+    list.style.display = list.style.display === 'none' ? 'block' : 'none';
+  }
+}
+  function explore(){
 
   navActive("navExplore");
 
@@ -2132,9 +2138,9 @@ function explore(){
 
     <!-- SHOP BY COUNTRY -->
 
-    <div class="section-head">
+    <div class="section-head ta-explore-country-head">
 
-      <h2>Shop by Country</h2>
+     <h2 onclick="toggleExploreCountrySection()">Shop by Country <span>⌄</span></h2>
 
       <button onclick="explore()">
         See All
@@ -2142,7 +2148,7 @@ function explore(){
 
     </div>
 
-    <div class="countries">
+   <div class="countries ta-explore-country-list" style="display:none">
 
       <div
         class="country"
