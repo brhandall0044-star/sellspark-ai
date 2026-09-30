@@ -1977,43 +1977,240 @@ function explore(){
   navActive("navExplore");
 
   app.innerHTML=`
-<button class="back" onclick="home()">← Home</button>
-    <div class="search">
-      🔎
-      <input
-        placeholder="${t("search")}"
-        oninput="exploreSearch(this.value)"
-      >
-    </div>
 
     <div class="page-title">
-      <h2>🔎 ${t("explore")}</h2>
+      <h1>Explore</h1>
     </div>
+
+    <p style="
+      margin:-5px 0 16px;
+      font-size:15px;
+      line-height:1.4;
+    ">
+      Discover amazing products from Haiti and around the world.
+    </p>
+
+    <!-- SEARCH -->
+
+    <div class="search">
+
+      🔎
+
+      <input
+        placeholder="Search products, categories..."
+        oninput="exploreSearch(this.value)"
+      >
+
+      <span style="font-size:18px;">☷</span>
+
+    </div>
+
+
+    <!-- CATEGORY PILLS -->
 
     <div class="categories">
 
-      <button class="category" onclick="filterCategory('Fashion')">👗 Fashion</button>
+      <button
+        class="category"
+        style="background:#e51b23;color:white;border-color:#e51b23;"
+        onclick="explore()"
+      >
+        All
+      </button>
 
-      <button class="category" onclick="filterCategory('Electronics')">📱 Electronics</button>
+      <button
+        class="category"
+        onclick="filterCategory('Fashion')"
+      >
+        👗 Fashion
+      </button>
 
-      <button class="category" onclick="filterCategory('Beauty')">💄 Beauty</button>
+      <button
+        class="category"
+        onclick="filterCategory('Electronics')"
+      >
+        📱 Electronics
+      </button>
 
-      <button class="category" onclick="filterCategory('Home')">🏠 Home</button>
+      <button
+        class="category"
+        onclick="filterCategory('Beauty')"
+      >
+        💄 Beauty
+      </button>
 
-      <button class="category" onclick="filterCategory('Kids')">🧸 Kids</button>
+      <button
+        class="category"
+        onclick="filterCategory('Home')"
+      >
+        🏠 Home
+      </button>
 
-      <button class="category" onclick="filterCategory('Gifts')">🎁 Gifts</button>
+      <button
+        class="category"
+        onclick="filterCategory('Handmade')"
+      >
+        🏺 Handmade
+      </button>
+
+      <button
+        class="category"
+        onclick="filterCategory('Health')"
+      >
+        🧴 Health
+      </button>
+
+      <button
+        class="category"
+        onclick="explore()"
+      >
+        More
+      </button>
 
     </div>
 
-    <div style="height:15px"></div>
+
+    <!-- SHOP BY COUNTRY -->
+
+    <div class="section-head">
+
+      <h2>Shop by Country</h2>
+
+      <button onclick="explore()">
+        See All
+      </button>
+
+    </div>
+
+    <div class="countries">
+
+      <div
+        class="country"
+        onclick="filterCountry('🇭🇹 Haiti')"
+      >
+        <div style="font-size:32px;">🇭🇹</div>
+        <b>Haiti</b>
+        <small>Shop local</small>
+      </div>
+
+      <div
+        class="country"
+        onclick="filterCountry('🇺🇸 USA')"
+      >
+        <div style="font-size:32px;">🇺🇸</div>
+        <b>USA</b>
+        <small>Shop from USA</small>
+      </div>
+
+      <div
+        class="country"
+        onclick="filterCountry('🇨🇦 Canada')"
+      >
+        <div style="font-size:32px;">🇨🇦</div>
+        <b>Canada</b>
+        <small>Shop from Canada</small>
+      </div>
+
+    </div>
+
+
+    <!-- POPULAR CATEGORIES -->
+
+    <div class="section-head">
+
+      <h2>Popular Categories</h2>
+
+      <button onclick="explore()">
+        See All
+      </button>
+
+    </div>
+
+    <div class="ta-popular-grid">
+
+      <div
+        class="ta-popular"
+        onclick="filterCategory('Fashion')"
+      >
+        <div class="ta-popular-img">👗</div>
+        <div class="ta-popular-name">
+          Fashion
+        </div>
+      </div>
+
+      <div
+        class="ta-popular"
+        onclick="filterCategory('Electronics')"
+      >
+        <div class="ta-popular-img">🎧</div>
+        <div class="ta-popular-name">
+          Electronics
+        </div>
+      </div>
+
+      <div
+        class="ta-popular"
+        onclick="filterCategory('Beauty')"
+      >
+        <div class="ta-popular-img">💄</div>
+        <div class="ta-popular-name">
+          Beauty
+        </div>
+      </div>
+
+      <div
+        class="ta-popular"
+        onclick="filterCategory('Home')"
+      >
+        <div class="ta-popular-img">🛋️</div>
+        <div class="ta-popular-name">
+          Home & Living
+        </div>
+      </div>
+
+      <div
+        class="ta-popular"
+        onclick="filterCategory('Handmade')"
+      >
+        <div class="ta-popular-img">🏺</div>
+        <div class="ta-popular-name">
+          Handmade
+        </div>
+      </div>
+
+      <div
+        class="ta-popular"
+        onclick="filterCategory('Health')"
+      >
+        <div class="ta-popular-img">🧴</div>
+        <div class="ta-popular-name">
+          Health & Wellness
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- NEW ARRIVALS -->
+
+    <div class="section-head">
+
+      <h2>New Arrivals</h2>
+
+      <button onclick="explore()">
+        See All
+      </button>
+
+    </div>
 
     <div id="exploreProducts" class="products">
-      ${products.map(productCard).join("")}
+
+      ${products.slice(0,4).map(productCard).join("")}
+
     </div>
+
   `;
 }
-
 function exploreSearch(value){
 
   const q=value.toLowerCase();
