@@ -1285,567 +1285,423 @@ function home(){
 
   app.innerHTML=`
 
-    <style>
+  <style>
 
-      /* ===== COMPACT TET ANSANM HOME ===== */
+  /* =========================================
+     TET ANSANM — HOME PAGE
+     MATCHES THE UPDATED REFERENCE DESIGN
+     ========================================= */
 
-      body:has(.ta-home) header{
-        background:#0b3d91;
-        color:white;
-        border-bottom:0;
-        box-shadow:0 2px 10px rgba(0,0,0,.15);
-      }
+  body:has(.ta-home){
+    background:#f7f9fc;
+    color:#17213a;
+  }
 
-      body:has(.ta-home) header .logo{
-        color:white;
-        font-size:21px;
-        line-height:1.05;
-      }
+  body:has(.ta-home) header{
+    background:#0b3d91;
+    color:white;
+    border-bottom:0;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
 
-      body:has(.ta-home) header .logo span{
-        display:none;
-      }
+  body:has(.ta-home) header .logo{
+    color:white;
+    font-size:21px;
+    line-height:1.05;
+  }
 
-      body:has(.ta-home) header .logo::after{
-        content:"Haitian Global Marketplace";
-        display:block;
-        color:rgba(255,255,255,.88);
-        font-size:10px;
-        font-weight:500;
-        margin-top:3px;
-        letter-spacing:.1px;
-      }
+  body:has(.ta-home) header .logo span{
+    color:#e51b23;
+  }
 
-      body:has(.ta-home) header .icon-btn{
-        background:rgba(255,255,255,.12);
-        color:white;
-      }
+  body:has(.ta-home) header .logo small{
+    display:block;
+    color:rgba(255,255,255,.88);
+    font-size:10px;
+    font-weight:500;
+    margin-top:3px;
+    letter-spacing:.1px;
+  }
 
-      .ta-home{
-        background:#f7f9fc;
-        color:#17213a;
-        padding-bottom:25px;
-      }
+  body:has(.ta-home) header .icon-btn{
+    background:rgba(255,255,255,.12);
+    color:white;
+  }
 
-      /* COMPACT HERO */
-      .ta-hero{
-        margin:0 0 18px;
-        min-height:0;
-        padding:20px 16px 18px;
-        border-radius:0 0 22px 22px;
-        background:
-          linear-gradient(135deg,rgba(11,61,145,.92),rgba(229,27,35,.86)),
-          url('86919.png') center/cover no-repeat;
-        position:relative;
-        overflow:hidden;
-      }
+  .ta-home{
+    background:#f7f9fc;
+    color:#17213a;
+    padding-bottom:25px;
+  }
 
-      .ta-hero::after{
-        content:"";
-        position:absolute;
-        width:150px;
-        height:150px;
-        right:-45px;
-        top:5px;
-        border-radius:50%;
-        background:rgba(255,255,255,.07);
-      }
+  /* =========================================
+     COMPACT HERO
+     ========================================= */
 
-      .ta-hero-content{
-        position:relative;
-        z-index:2;
-      }
+  .ta-hero{
+    margin:0 0 18px;
+    padding:20px 16px 18px;
+    border-radius:0 0 22px 22px;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(11,61,145,.94),
+        rgba(229,27,35,.88)
+      ),
+      url('86919.png') center/cover;
+    position:relative;
+    overflow:hidden;
+  }
 
-      .ta-hero h1{
-        color:white;
-        font-size:25px;
-        line-height:1.1;
-        margin:0 0 5px;
-        font-weight:850;
-      }
+  .ta-hero:after{
+    content:"";
+    position:absolute;
+    width:150px;
+    height:150px;
+    right:-45px;
+    top:5px;
+    border-radius:50%;
+    background:rgba(255,255,255,.07);
+  }
 
-      .ta-hero p{
-        color:rgba(255,255,255,.92);
-        font-size:14px;
-        line-height:1.35;
-        margin:0 0 13px;
-      }
+  .ta-hero-content{
+    position:relative;
+    z-index:2;
+  }
 
-      .ta-search{
-        display:flex;
-        align-items:center;
-        gap:8px;
-        background:white;
-        border-radius:16px;
-        padding:3px 11px;
-        box-shadow:0 5px 16px rgba(0,0,0,.16);
-        margin:0 0 10px;
-      }
+  .ta-hero h1{
+    color:white;
+    font-size:25px;
+    line-height:1.1;
+    margin:0 0 5px;
+    font-weight:850;
+  }
 
-      .ta-search-icon{
-        font-size:19px;
-      }
+  .ta-hero p{
+    color:rgba(255,255,255,.92);
+    font-size:14px;
+    line-height:1.35;
+    margin:0 0 13px;
+  }
 
-      .ta-search input{
-        border:0;
-        outline:0;
-        width:100%;
-        min-height:42px;
-        font-size:14px;
-        background:transparent;
-        color:#17213a;
-        padding:5px 2px;
-        margin:0;
-        box-shadow:none;
-      }
+  /* =========================================
+     SEARCH
+     ========================================= */
 
-      .ta-search input:focus{
-        box-shadow:none;
-      }
+  .ta-search{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:white;
+    border-radius:16px;
+    padding:3px 11px;
+    box-shadow:0 5px 16px rgba(0,0,0,.12);
+    margin:0 0 10px;
+  }
 
-      .ta-action-row{
-        display:grid;
-        grid-template-columns:1fr 1.15fr;
-        gap:8px;
-      }
+  .ta-search-icon{
+    font-size:19px;
+    color:#6b7280;
+  }
 
-      .ta-shop-btn,
-      .ta-sell{
-        min-height:43px;
-        border-radius:13px;
-        padding:9px 10px;
-        font-size:13px;
-        font-weight:800;
-        cursor:pointer;
-      }
+  .ta-search input{
+    border:0;
+    outline:0;
+    width:100%;
+    min-height:42px;
+    font-size:14px;
+    background:transparent;
+    color:#17213a;
+    padding:5px 2px;
+    margin:0;
+  }
 
-      .ta-shop-btn{
-        background:#e51b23;
-        color:white;
-        border:1px solid rgba(255,255,255,.2);
-      }
+  .ta-search input:focus{
+    box-shadow:none;
+  }
 
-      .ta-sell{
-        background:rgba(11,61,145,.45);
-        color:white;
-        border:1px solid rgba(255,255,255,.85);
-        box-shadow:none;
-        width:auto;
-      }
+  /* =========================================
+     ACTION BUTTONS
+     ========================================= */
 
-      /* SECTIONS */
-      .ta-section{
-        padding:0 14px;
-        margin-bottom:18px;
-      }
+  .ta-action-row{
+    display:grid;
+    grid-template-columns:1fr 1.15fr;
+    gap:8px;
+  }
 
-      .ta-section-head{
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        margin-bottom:9px;
-      }
+  .ta-shop-btn,
+  .ta-sell{
+    min-height:43px;
+    border-radius:13px;
+    padding:9px 10px;
+    font-size:13px;
+    font-weight:800;
+    cursor:pointer;
+  }
 
-      .ta-section-head h2{
-        margin:0;
-        font-size:18px;
-        font-weight:850;
-        color:#17213a;
-      }
+  .ta-shop-btn{
+    background:#e51b23;
+    color:white;
+    border:1px solid rgba(255,255,255,.35);
+    box-shadow:0 2px 5px rgba(0,0,0,.08);
+  }
 
-      .ta-see{
-        color:#1554c0;
-        font-weight:800;
-        border:0;
-        background:transparent;
-        font-size:13px;
-        padding:3px;
-        cursor:pointer;
-      }
+  .ta-sell{
+    background:rgba(11,61,145,.45);
+    color:white;
+    border:1px solid rgba(255,255,255,.85);
+    box-shadow:none;
+    width:auto;
+  }
 
-      /* QUICK CATEGORIES */
-      .ta-quick{
-        display:flex;
-        gap:10px;
-        overflow-x:auto;
-        padding:2px 0 5px;
-        scrollbar-width:none;
-      }
+  /* =========================================
+     SECTIONS
+     ========================================= */
 
-      .ta-quick::-webkit-scrollbar{
-        display:none;
-      }
+  .ta-section{
+    padding:0 14px;
+    margin-bottom:18px;
+  }
 
-      .ta-quick-card{
-        flex:0 0 62px;
-        text-align:center;
-        border:0;
-        background:transparent;
-        padding:0;
-        cursor:pointer;
-      }
+  .ta-section-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:9px;
+  }
 
-      .ta-quick-icon{
-        width:54px;
-        height:54px;
-        margin:auto;
-        border-radius:50%;
-        background:white;
-        border:1px solid #e7eaf0;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-size:27px;
-        box-shadow:0 2px 8px rgba(0,0,0,.06);
-      }
+  .ta-section-head h2{
+    margin:0;
+    font-size:18px;
+    font-weight:850;
+    color:#17213a;
+  }
 
-      .ta-quick-card span{
-        display:block;
-        margin-top:5px;
-        font-size:11px;
-        font-weight:700;
-        color:#26344d;
-      }
+  .ta-see{
+    color:#1554c0;
+    font-weight:800;
+    border:0;
+    background:transparent;
+    font-size:13px;
+    padding:3px;
+    cursor:pointer;
+  }
 
-      /* POPULAR ITEMS */
-      .ta-home-products{
-        display:grid;
-        grid-template-columns:repeat(3,minmax(0,1fr));
-        gap:9px;
-      }
+  /* =========================================
+     QUICK CATEGORIES
+     ========================================= */
 
-      .ta-home-product{
-        background:white;
-        border:1px solid #e8ebf0;
-        border-radius:14px;
-        overflow:hidden;
-        position:relative;
-        cursor:pointer;
-        box-shadow:0 2px 8px rgba(0,0,0,.05);
-        min-width:0;
-      }
+  .ta-quick{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding:2px 0 5px;
+    scrollbar-width:none;
+  }
 
-      .ta-home-product-img{
-        height:112px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-size:48px;
-        background:#f1f3f7;
-      }
+  .ta-quick::-webkit-scrollbar{
+    display:none;
+  }
 
-      .ta-home-product:nth-child(1) .ta-home-product-img{background:#ffe9df;}
-      .ta-home-product:nth-child(2) .ta-home-product-img{background:#e1ecff;}
-      .ta-home-product:nth-child(3) .ta-home-product-img{background:#fff4d5;}
-      .ta-home-product:nth-child(4) .ta-home-product-img{background:#e1f3df;}
-      .ta-home-product:nth-child(5) .ta-home-product-img{background:#eee4ff;}
-      .ta-home-product:nth-child(6) .ta-home-product-img{background:#dff6f3;}
+  .ta-quick-card{
+    flex:0 0 62px;
+    text-align:center;
+    border:0;
+    background:transparent;
+    padding:0;
+    cursor:pointer;
+  }
 
-      .ta-home-heart{
-        position:absolute;
-        top:6px;
-        right:6px;
-        width:27px;
-        height:27px;
-        border-radius:50%;
-        border:0;
-        background:white;
-        font-size:14px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        box-shadow:0 2px 5px rgba(0,0,0,.08);
-        z-index:2;
-      }
+  .ta-quick-icon{
+    width:54px;
+    height:54px;
+    margin:auto;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    background:white;
+    border:1px solid #e7eaf0;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+  }
 
-      .ta-home-product-body{
-        padding:8px;
-      }
+  .ta-quick-card:nth-child(1) .ta-quick-icon{
+    background:#ffe3e8;
+  }
 
-      .ta-home-product-name{
-        font-size:12px;
-        font-weight:750;
-        line-height:1.25;
-        min-height:30px;
-        color:#17213a;
-      }
+  .ta-quick-card:nth-child(2) .ta-quick-icon{
+    background:#e2edff;
+  }
 
-      .ta-home-product-price{
-        font-size:14px;
-        font-weight:850;
-        margin-top:4px;
-        color:#111827;
-      }
+  .ta-quick-card:nth-child(3) .ta-quick-icon{
+    background:#ffe5e5;
+  }
 
-      .ta-home-product-seller{
-        color:#737b8a;
-        font-size:9px;
-        margin-top:3px;
-        white-space:nowrap;
-        overflow:hidden;
-        text-overflow:ellipsis;
-      }
+  .ta-quick-card:nth-child(4) .ta-quick-icon{
+    background:#dcf5e4;
+  }
 
-      /* COLLAPSIBLE COUNTRY */
-      .ta-country-collapsible{
-        margin-top:2px;
-      }
+  .ta-quick-card:nth-child(5) .ta-quick-icon{
+    background:#eee4ff;
+  }
 
-      .ta-country-toggle{
-        width:100%;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        background:white;
-        border:1px solid #e5e7eb;
-        border-radius:14px;
-        padding:12px 13px;
-        font-weight:800;
-        color:#17213a;
-        cursor:pointer;
-      }
+  .ta-quick-card span{
+    display:block;
+    margin-top:5px;
+    font-size:11px;
+    font-weight:700;
+    color:#26344d;
+  }
 
-      .ta-country-row{
-        display:none;
-        gap:9px;
-        overflow-x:auto;
-        padding:9px 0 2px;
-      }
+  /* =========================================
+     POPULAR ITEMS
+     ========================================= */
 
-      .ta-country{
-        min-width:115px;
-        background:white;
-        border:1px solid #eee;
-        border-radius:13px;
-        padding:11px;
-        cursor:pointer;
-      }
+  .ta-home-products{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:9px;
+  }
 
-      .ta-country-flag{
-        font-size:28px;
-      }
+  .ta-home-product{
+    background:white;
+    border:1px solid #e8ebf0;
+    border-radius:14px;
+    overflow:hidden;
+    position:relative;
+    cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+    min-width:0;
+  }
 
-      .ta-country strong{
-        display:block;
-        font-size:14px;
-        margin-top:4px;
-      }
+  .ta-home-product-img{
+    height:112px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:48px;
+    background:#f1f3f7;
+  }
 
-      .ta-country small{
-        color:#737b8a;
-        font-size:10px;
-      }
+  .ta-home-product-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
 
-      /* SAFETY */
-      .ta-safe{
-        background:#fff9eb;
-        border:1px solid #f1dfae;
-        border-radius:16px;
-        padding:14px;
-      }
+  .ta-home-product-info{
+    padding:8px 8px 9px;
+  }
 
-      .ta-safe h3{
-        margin:0 0 6px;
-        font-size:16px;
-      }
+  .ta-home-product-info strong{
+    display:block;
+    font-size:12px;
+    line-height:1.2;
+    color:#17213a;
+    margin-bottom:4px;
+  }
 
-      .ta-safe p{
-        margin:0;
-        color:#687080;
-        font-size:12px;
-        line-height:1.45;
-      }
+  .ta-home-product-price{
+    font-size:14px;
+    font-weight:850;
+    color:#111827;
+  }
 
-      @media(max-width:360px){
-        .ta-home-products{
-          grid-template-columns:repeat(2,minmax(0,1fr));
-        }
+  .ta-home-heart{
+    position:absolute;
+    top:6px;
+    right:6px;
+    width:27px;
+    height:27px;
+    border-radius:50%;
+    border:0;
+    background:white;
+    font-size:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 2px 5px rgba(0,0,0,.12);
+    z-index:3;
+    cursor:pointer;
+  }
 
-        .ta-home-product-img{
-          height:130px;
-        }
-      }
+  /* =========================================
+     MOBILE
+     ========================================= */
 
-    </style>
+  @media(max-width:480px){
 
-    <div class="ta-home">
+    .ta-hero{
+      padding:20px 16px 18px;
+    }
 
-      <!-- COMPACT HERO -->
-      <div class="ta-hero">
-        <div class="ta-hero-content">
+    .ta-hero h1{
+      font-size:25px;
+    }
 
-          <h1>Buy, Sell &amp; Connect</h1>
+    .ta-home-products{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:9px;
+    }
 
-          <p>
-            with the Haitian community worldwide
-          </p>
+    .ta-home-product-img{
+      height:112px;
+    }
 
-          <div class="ta-search">
-            <span class="ta-search-icon">🔍</span>
-            <input
-              placeholder="Search products, sellers..."
-              oninput="searchProducts(this.value)"
-            >
-          </div>
+  }
 
-          <div class="ta-action-row">
-            <button
-              class="ta-shop-btn"
-              onclick="explore()"
-            >
-              🏷️ Shop Now
-            </button>
+  </style>
 
-            <button
-              class="ta-sell"
-              onclick="sell()"
-            >
-              🏪 Sell on Tet Ansanm
-            </button>
-          </div>
+
+  <div class="ta-home">
+
+    <!-- =====================================
+         COMPACT HERO
+         ===================================== -->
+
+    <div class="ta-hero">
+
+      <div class="ta-hero-content">
+
+        <h1>Buy, Sell &amp; Connect</h1>
+
+        <p>
+          with the Haitian community worldwide
+        </p>
+
+        <!-- SEARCH -->
+
+        <div class="ta-search">
+
+          <span class="ta-search-icon">⌕</span>
+
+          <input
+            placeholder="Search products, sellers..."
+            oninput="searchProducts(this.value)"
+          >
 
         </div>
-      </div>
 
-      <!-- SHOP BY CATEGORIES -->
-      <div class="ta-section">
+        <!-- ACTION BUTTONS -->
 
-        <div class="ta-section-head">
-          <h2>Shop by Categories</h2>
+        <div class="ta-action-row">
 
           <button
-            class="ta-see"
+            class="ta-shop-btn"
             onclick="explore()"
           >
-            See All
-          </button>
-        </div>
-
-        <div class="ta-quick">
-
-          <button
-            class="ta-quick-card"
-            onclick="filterCategory('Fashion')"
-          >
-            <div class="ta-quick-icon">👗</div>
-            <span>Fashion</span>
+            🏷️ Shop Now
           </button>
 
           <button
-            class="ta-quick-card"
-            onclick="filterCategory('Electronics')"
+            class="ta-sell"
+            onclick="sell()"
           >
-            <div class="ta-quick-icon">📱</div>
-            <span>Electronics</span>
+            🏪 Sell on Tet Ansanm
           </button>
-
-          <button
-            class="ta-quick-card"
-            onclick="filterCategory('Beauty')"
-          >
-            <div class="ta-quick-icon">💄</div>
-            <span>Beauty</span>
-          </button>
-
-          <button
-            class="ta-quick-card"
-            onclick="filterCategory('Home')"
-          >
-            <div class="ta-quick-icon">🏠</div>
-            <span>Home</span>
-          </button>
-
-          <button
-            class="ta-quick-card"
-            onclick="explore()"
-          >
-            <div class="ta-quick-icon">•••</div>
-            <span>More</span>
-          </button>
-
-        </div>
-
-      </div>
-
-      <!-- POPULAR ITEMS -->
-      <div class="ta-section">
-
-        <div class="ta-section-head">
-          <h2>Popular Items</h2>
-
-          <button
-            class="ta-see"
-            onclick="explore()"
-          >
-            See All
-          </button>
-        </div>
-
-        <div id="homeProducts" class="ta-home-products">
-          ${products.slice(0,6).map(homeProductCard).join("")}
-        </div>
-
-      </div>
-
-      <!-- SHOP BY COUNTRY - HIDDEN UNTIL OPENED -->
-      <div class="ta-section ta-country-collapsible">
-
-        <button
-          class="ta-country-toggle"
-          onclick="toggleCountrySection()"
-        >
-          <span>🌎 Shop by Country</span>
-          <span>⌄</span>
-        </button>
-
-        <div class="ta-country-row">
-
-          <div class="ta-country" onclick="filterCountry('🇭🇹 Haiti')">
-            <div class="ta-country-flag">🇭🇹</div>
-            <strong>Haiti</strong>
-            <small>Shop local</small>
-          </div>
-
-          <div class="ta-country" onclick="filterCountry('🇺🇸 USA')">
-            <div class="ta-country-flag">🇺🇸</div>
-            <strong>USA</strong>
-            <small>Shop from USA</small>
-          </div>
-
-          <div class="ta-country" onclick="filterCountry('🇨🇦 Canada')">
-            <div class="ta-country-flag">🇨🇦</div>
-            <strong>Canada</strong>
-            <small>Shop from Canada</small>
-          </div>
-
-          <div class="ta-country" onclick="filterCountry('🇩🇴 Dominican Republic')">
-            <div class="ta-country-flag">🇩🇴</div>
-            <strong>Dominican Republic</strong>
-            <small>Shop from DR</small>
-          </div>
-
-          <div class="ta-country" onclick="filterCountry('🇫🇷 France')">
-            <div class="ta-country-flag">🇫🇷</div>
-            <strong>France</strong>
-            <small>Shop from France</small>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- SAFETY -->
-      <div class="ta-section">
-
-        <div class="ta-safe">
-
-          <h3>🛡️ Shop safely</h3>
-
-          <p>
-            Keep conversations inside Tet Ansanm.
-            Never send verification codes, gift cards,
-            or money to someone you don't know.
-          </p>
 
         </div>
 
@@ -1853,9 +1709,114 @@ function home(){
 
     </div>
 
+
+    <!-- =====================================
+         SHOP BY CATEGORIES
+         ===================================== -->
+
+    <div class="ta-section">
+
+      <div class="ta-section-head">
+
+        <h2>Shop by Categories</h2>
+
+        <button
+          class="ta-see"
+          onclick="explore()"
+        >
+          See All
+        </button>
+
+      </div>
+
+
+      <div class="ta-quick">
+
+        <button
+          class="ta-quick-card"
+          onclick="filterCategory('Fashion')"
+        >
+          <div class="ta-quick-icon">👗</div>
+          <span>Fashion</span>
+        </button>
+
+
+        <button
+          class="ta-quick-card"
+          onclick="filterCategory('Electronics')"
+        >
+          <div class="ta-quick-icon">📱</div>
+          <span>Electronics</span>
+        </button>
+
+
+        <button
+          class="ta-quick-card"
+          onclick="filterCategory('Beauty')"
+        >
+          <div class="ta-quick-icon">💄</div>
+          <span>Beauty</span>
+        </button>
+
+
+        <button
+          class="ta-quick-card"
+          onclick="filterCategory('Home')"
+        >
+          <div class="ta-quick-icon">🏠</div>
+          <span>Home</span>
+        </button>
+
+
+        <button
+          class="ta-quick-card"
+          onclick="explore()"
+        >
+          <div class="ta-quick-icon">•••</div>
+          <span>More</span>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================
+         POPULAR ITEMS
+         ===================================== -->
+
+    <div class="ta-section">
+
+      <div class="ta-section-head">
+
+        <h2>Popular Items</h2>
+
+        <button
+          class="ta-see"
+          onclick="explore()"
+        >
+          See All
+        </button>
+
+      </div>
+
+
+      <div id="homeProducts" class="ta-home-products">
+
+        ${
+          products
+            .slice(0,6)
+            .map(homeProductCard)
+            .join("")
+        }
+
+      </div>
+
+    </div>
+
+  </div>
   `;
 }
-
 
 /* HOME PRODUCT CARD */
 
