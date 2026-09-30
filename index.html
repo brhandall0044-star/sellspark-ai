@@ -918,6 +918,34 @@ main#app:has(.categories) .country b{
 main#app:has(.categories) .country small{
   font-size:12px;
 }
+/* ===== SMALL POPULAR CATEGORIES ===== */
+
+main#app:has(.categories) .ta-popular-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+
+main#app:has(.categories) .ta-popular{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:8px 5px;
+  min-height:70px;
+  text-align:center;
+}
+
+main#app:has(.categories) .ta-popular-img{
+  font-size:24px;
+  line-height:1;
+  margin-bottom:5px;
+}
+
+main#app:has(.categories) .ta-popular-name{
+  font-size:12px;
+  font-weight:600;
+  line-height:1.2;
+}
 </style>
 </head>
 
