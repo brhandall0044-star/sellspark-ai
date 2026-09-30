@@ -1894,87 +1894,52 @@ function home(){
 
 
       <!-- POPULAR CATEGORIES -->
-      <div class="ta-section">
+<div class="ta-section">
 
-        <div class="ta-section-head">
+  <details class="ta-collapsible">
 
-          <h2>Popular Categories</h2>
+    <summary>
+      <span>☷ Categories</span>
+      <span class="ta-arrow">⌄</span>
+    </summary>
 
-          <button
-            class="ta-see"
-            onclick="explore()"
-          >
-            See All
-          </button>
+    <div class="ta-popular-grid">
 
-        </div>
-
-        <div class="ta-popular-grid">
-
-          <div
-            class="ta-popular"
-            onclick="filterCategory('Fashion')"
-          >
-            <div class="ta-popular-img">👗</div>
-            <div class="ta-popular-name">
-              Fashion
-            </div>
-          </div>
-
-          <div
-            class="ta-popular"
-            onclick="filterCategory('Electronics')"
-          >
-            <div class="ta-popular-img">🎧</div>
-            <div class="ta-popular-name">
-              Electronics
-            </div>
-          </div>
-
-          <div
-            class="ta-popular"
-            onclick="filterCategory('Beauty')"
-          >
-            <div class="ta-popular-img">💄</div>
-            <div class="ta-popular-name">
-              Beauty
-            </div>
-          </div>
-
-          <div
-            class="ta-popular"
-            onclick="filterCategory('Home')"
-          >
-            <div class="ta-popular-img">🛋️</div>
-            <div class="ta-popular-name">
-              Home
-            </div>
-          </div>
-
-          <div
-            class="ta-popular"
-            onclick="filterCategory('Handmade')"
-          >
-            <div class="ta-popular-img">🏺</div>
-            <div class="ta-popular-name">
-              Handmade
-            </div>
-          </div>
-
-          <div
-            class="ta-popular"
-            onclick="filterCategory('Health')"
-          >
-            <div class="ta-popular-img">🧴</div>
-            <div class="ta-popular-name">
-              Health & Wellness
-            </div>
-          </div>
-
-        </div>
-
+      <div class="ta-popular" onclick="filterCategory('Fashion')">
+        <div class="ta-popular-img">👗</div>
+        <div class="ta-popular-name">Fashion</div>
       </div>
 
+      <div class="ta-popular" onclick="filterCategory('Electronics')">
+        <div class="ta-popular-img">🎧</div>
+        <div class="ta-popular-name">Electronics</div>
+      </div>
+
+      <div class="ta-popular" onclick="filterCategory('Beauty')">
+        <div class="ta-popular-img">💄</div>
+        <div class="ta-popular-name">Beauty</div>
+      </div>
+
+      <div class="ta-popular" onclick="filterCategory('Home')">
+        <div class="ta-popular-img">🏠</div>
+        <div class="ta-popular-name">Home & Living</div>
+      </div>
+
+      <div class="ta-popular" onclick="filterCategory('Handmade')">
+        <div class="ta-popular-img">🏺</div>
+        <div class="ta-popular-name">Handmade</div>
+      </div>
+
+      <div class="ta-popular" onclick="filterCategory('Health')">
+        <div class="ta-popular-img">🧴</div>
+        <div class="ta-popular-name">Health & Wellness</div>
+      </div>
+
+    </div>
+
+  </details>
+
+</div>
 
       <!-- SAFETY -->
       <div class="ta-section">
