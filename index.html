@@ -1826,11 +1826,11 @@ function home(){
 
 
       <!-- SHOP BY COUNTRY -->
-      <div class="ta-section">
+      <div class="ta-section ta-country-collapsible">
 
         <div class="ta-section-head">
 
-          <h2>Shop by Country</h2>
+          <h2 onclick="toggleCountrySection()">Shop by Country <span>⌄</span></h2>
 
           <button
             class="ta-see"
@@ -1841,7 +1841,7 @@ function home(){
 
         </div>
 
-        <div class="ta-country-row">
+        <div class="ta-country-row" style="display:none">
 
           <div
             class="ta-country"
@@ -2026,7 +2026,12 @@ function filterCountry(country){
     </div>
   `;
 }
-
+function toggleCountrySection(){
+  const row = document.querySelector('.ta-country-collapsible .ta-country-row');
+  if(row){
+    row.style.display = row.style.display === 'none' ? 'flex' : 'none';
+  }
+}
 function explore(){
 
   navActive("navExplore");
