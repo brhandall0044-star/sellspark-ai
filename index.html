@@ -954,11 +954,15 @@ main#app:has(.categories) .ta-popular-name{
 <div class="app">
 
 <header>
-  <div class="logo">🛍️ Tet Ansanm <span>Market</span></div>
+  <div class="logo">
+    🛍️ <span class="logo-main">Tet <b>Ansanm</b></span>
+    <small>Haitian Global Marketplace</small>
+  </div>
 
   <div class="header-actions">
+    <button class="icon-btn" onclick="searchProducts('')">🔍</button>
     <button class="icon-btn" onclick="notifications()">🔔</button>
-    <button class="icon-btn" onclick="profile()">👤</button>
+    <button class="icon-btn" onclick="toggleMenu()">☰</button>
   </div>
 </header>
 
@@ -1309,7 +1313,60 @@ function home(){
     font-size:21px;
     line-height:1.05;
   }
+body:has(.ta-home) header{
+  min-height:114px;
+  padding:18px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
+body:has(.ta-home) header .logo{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  color:white;
+  font-size:34px;
+  font-weight:700;
+  line-height:1;
+}
+
+body:has(.ta-home) header .logo-main{
+  color:white;
+  font-size:34px;
+  font-weight:700;
+}
+
+body:has(.ta-home) header .logo-main b{
+  color:#e51b23;
+}
+
+body:has(.ta-home) header .logo small{
+  display:block;
+  margin-top:7px;
+  color:white;
+  font-size:16px;
+  font-weight:500;
+}
+
+body:has(.ta-home) header .header-actions{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+body:has(.ta-home) header .icon-btn{
+  background:transparent;
+  border:0;
+  color:white;
+  font-size:32px;
+  width:48px;
+  height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
   body:has(.ta-home) header .logo span{
     color:#e51b23;
   }
