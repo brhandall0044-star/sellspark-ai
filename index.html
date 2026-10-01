@@ -955,17 +955,39 @@ main#app:has(.categories) .ta-popular-name{
 
 <header>
   <div class="logo">
-    🛍️ <span class="logo-main">Tet <b>Ansanm</b></span>
+    <span class="logo-main">Tet <b>Ansanm</b></span>
     <small>Haitian Global Marketplace</small>
   </div>
 
   <div class="header-actions">
-    <button class="icon-btn" onclick="searchProducts('')">🔍</button>
-    <button class="icon-btn" onclick="notifications()">🔔</button>
-    <button class="icon-btn" onclick="toggleMenu()">☰</button>
+
+    <button class="icon-btn" onclick="searchProducts('')" aria-label="Search">
+      <svg width="25" height="25" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+      </svg>
+    </button>
+
+    <button class="icon-btn" onclick="notifications()" aria-label="Notifications">
+      <svg width="25" height="25" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
+        <path d="M10 21h4"></path>
+      </svg>
+    </button>
+
+    <button class="icon-btn" onclick="toggleMenu()" aria-label="Menu">
+      <svg width="27" height="27" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="4" y1="6" x2="20" y2="6"></line>
+        <line x1="4" y1="12" x2="20" y2="12"></line>
+        <line x1="4" y1="18" x2="20" y2="18"></line>
+      </svg>
+    </button>
+
   </div>
 </header>
-
 <main id="app"></main>
 
 <nav>
