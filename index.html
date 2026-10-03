@@ -1729,6 +1729,38 @@ rgba(229,27,35,.45)
      ========================================= */
 
   @media(max-width:480px){
+    body:has(.ta-home) header{
+      padding:14px 12px;
+      min-height:100px;
+    }
+
+    body:has(.ta-home) header .logo{
+      grid-template-columns:58px auto;
+      grid-template-rows:auto auto;
+      column-gap:8px;
+      min-width:0;
+    }
+
+    body:has(.ta-home) header .logo-main{
+      font-size:25px;
+      white-space:nowrap;
+    }
+
+    body:has(.ta-home) header .logo small{
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    body:has(.ta-home) header .header-actions{
+      gap:5px;
+      flex-shrink:0;
+    }
+
+    body:has(.ta-home) header .icon-btn{
+      width:40px;
+      height:40px;
+      font-size:20px;
+    }
 
     .ta-hero{
       padding:20px 16px 18px;
