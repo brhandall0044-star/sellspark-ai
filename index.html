@@ -1780,7 +1780,63 @@ rgba(229,27,35,.45)
     }
 
   }
+/* =========================================
+   TET ANSANM — MOBILE HEADER FINAL
+   ========================================= */
 
+@media(max-width:480px){
+
+  body:has(.ta-home) header{
+    min-height:118px;
+    padding:16px 12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  body:has(.ta-home) header .logo{
+    display:grid;
+    grid-template-columns:58px 1fr;
+    grid-template-rows:auto auto;
+    column-gap:7px;
+    align-items:center;
+    min-width:0;
+    flex:1;
+  }
+
+  body:has(.ta-home) header .logo-main{
+    grid-column:2;
+    grid-row:1;
+    font-size:27px;
+    line-height:1;
+    white-space:nowrap;
+  }
+
+  body:has(.ta-home) header .logo small{
+    grid-column:2;
+    grid-row:2;
+    font-size:12px;
+    line-height:1.1;
+    margin-top:4px;
+    white-space:nowrap;
+  }
+
+  body:has(.ta-home) header .header-actions{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-shrink:0;
+  }
+
+  body:has(.ta-home) header .icon-btn{
+    width:42px;
+    height:42px;
+    min-width:42px;
+    font-size:21px;
+    border-radius:50%;
+  }
+
+}
   </style>
 
 
